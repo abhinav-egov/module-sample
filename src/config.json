@@ -1,0 +1,42 @@
+[
+  {
+    "name": "fullName",
+    "id": "fullName",
+    "type": "text",
+    "component": "input-field",
+    "placeholder": "John Doe",
+    "label": "Full Name"
+  },
+  {
+    "name": "email",
+    "id": "email",
+    "type": "email",
+    "component": "input-field",
+    "placeholder": "john.doe@egovernments.com",
+    "label": "Email Address"
+  },
+  {
+    "name": "phoneNumber",
+    "id": "phoneNumber",
+    "type": "tel",
+    "component": "input-field",
+    "placeholder": "12345678",
+    "label": "Phone Number"
+  },
+  {
+    "name": "title",
+    "id": "title",
+    "type": "text",
+    "component": "input-field",
+    "placeholder": "",
+    "label": "Title"
+  },
+  {
+    "name": "description",
+    "id": "description",
+    "type": "text",
+    "component": "input-field",
+    "placeholder": "",
+    "label": "Description"
+  }
+]
