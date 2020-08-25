@@ -1,16 +1,25 @@
 import React, { useState, useMemo } from 'react';
+// import { TextInput } from './egov-ui-components/src/components/input'
+// import { Route, BrowserRouter as Router } from 'react-router-dom';
 import ComponentMap from "./ComponentMap";
 import { Renderer } from "./Renderer";
 import pageConfig from "./config.json";
-import './App.css';
+import './index.scss';
 
-const getConfig = ({ state, onChange }) => {
-  return pageConfig.map((item) => {
-    const { component, name, ...props } = item;
+import { RegisterFunction, GetFunction } from "./FunctionRegistry";
+
+const getConfig = ({ config, state, repeatClicked, onChange }) => {
+  if (!config || config.length === 0) return [];
+  return config.map((item) => {
+    const { component, name, fields, submit, ...props } = item;
     return {
       ...props,
+      submit: submit ? GetFunction(submit) : undefined,
+      fields: fields && fields.length > 0 ? getConfig({ config: fields, state, onChange, repeatClicked }) : null,
       name,
       value: state[name],
+      repeats: component === 'form-section-repeat-group' ? state[name + '-repeats'] || 1 : null,
+      dorepeat: component === 'form-section-repeat-group' ? repeatClicked(name) : null,
       onChange: component === 'input-field' ? onChange(name) : null,
       component: ComponentMap[component]
     }
@@ -21,7 +30,7 @@ function App() {
   const [state, setState] = useState({});
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e && e.preventDefault();
     console.log("state", state);
   }
 
@@ -30,25 +39,39 @@ function App() {
     setState(prevState => ({ ...prevState, [field]: value }));
   }
 
+  const handleRepeatClick = field => event => {
+    event.preventDefault();
+    // console.log(state);
+    setState(prevState => {
+      console.log(prevState);
+      const stateKey = `${field}-repeats`;
+      const prevValue = prevState[stateKey] || 1;
+      return { ...prevState, [stateKey]: prevValue + 1 }
+    })
+  }
+
+  const fullNameKeyup = (event) => {
+    console.log(event.target.value);
+  }
+
   const config = useMemo(() => {
-    const config = getConfig({ state, onChange: handleOnChange });
-    console.log(config);
-    return config;
+    return getConfig({ config: pageConfig, state, onChange: handleOnChange, repeatClicked: handleRepeatClick });
   }, [state]);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        eGov PGR
-      </header>
+  // const config = getConfig({ config: pageConfig, state, onChange: handleOnChange, repeatClicked: handleRepeatClick });
 
-      <form onSubmit={handleSubmit}>
+  RegisterFunction('form-submit', handleSubmit);
+  RegisterFunction('fullNameKeyup', fullNameKeyup)
+
+  return (
+    <div className="govuk-width-container">
+      <h1 className="egov-heading">eGov PGR</h1>
+      {/* <TextInput></TextInput> */}
+      <div className="govuk-grid-row">
         <Renderer config={config} />
-        <button className="govuk-button" data-module="govuk-button">
-          Save and continue
-        </button>
-      </form>
+      </div>
     </div>
+
   );
 }
 

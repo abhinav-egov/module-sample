@@ -25,9 +25,14 @@ export const Renderer = ({ config }) => {
 
   const renderComponents = (items) => {
     return items.map(item => {
-      const { Component, ...props } = item;
+      const { Component, fields, ...props } = item;
+      if (fields && fields.length > 1) {
+        return (<Fragment key={props.name || props.id}>
+          <Component {...props} ><Renderer config={fields} /></Component>
+        </Fragment>)
+      }
       return (
-        <Fragment key={props.name}>
+        <Fragment key={props.name || props.id}>
           <Component {...props} />
         </Fragment>
       );

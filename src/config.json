@@ -1,42 +1,150 @@
 [
   {
-    "name": "fullName",
-    "id": "fullName",
-    "type": "text",
-    "component": "input-field",
-    "placeholder": "John Doe",
-    "label": "Full Name"
+    "id": "header",
+    "component": "header",
+    "text": "form example"
   },
   {
-    "name": "email",
-    "id": "email",
-    "type": "email",
-    "component": "input-field",
-    "placeholder": "john.doe@egovernments.com",
-    "label": "Email Address"
-  },
-  {
-    "name": "phoneNumber",
-    "id": "phoneNumber",
-    "type": "tel",
-    "component": "input-field",
-    "placeholder": "12345678",
-    "label": "Phone Number"
-  },
-  {
-    "name": "title",
-    "id": "title",
-    "type": "text",
-    "component": "input-field",
-    "placeholder": "",
-    "label": "Title"
-  },
-  {
-    "name": "description",
-    "id": "description",
-    "type": "text",
-    "component": "input-field",
-    "placeholder": "",
-    "label": "Description"
+    "id": "form",
+    "component": "form",
+    "submit": "form-submit",
+    "fields": [
+      {
+        "id": "form-section-1",
+        "component": "form-section",
+        "title": "Section 1",
+        "fields": [
+          {
+            "name": "fullName",
+            "id": "fullName",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "John Doe",
+            "label": "Full Name"
+          },
+          {
+            "name": "email",
+            "id": "email",
+            "type": "email",
+            "component": "input-field",
+            "placeholder": "john.doe@egovernments.com",
+            "label": "Email Address"
+          },
+          {
+            "name": "phoneNumber",
+            "id": "phoneNumber",
+            "type": "tel",
+            "component": "input-field",
+            "placeholder": "12345678",
+            "label": "Phone Number"
+          },
+          {
+            "name": "title",
+            "id": "title",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "",
+            "label": "Title"
+          },
+          {
+            "name": "description",
+            "id": "description",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "",
+            "label": "Description"
+          },
+          {
+            "id": "repeat-group-1",
+            "name": "ulb-section",
+            "component": "form-section-repeat-group",
+            "min": 1,
+            "max": 5,
+            "fields": [
+              {
+                "name": "ulb",
+                "id": "ulb",
+                "component": "input-select",
+                "placeholder": "",
+                "label": "City",
+                "options": [
+                  {
+                    "text": "Amritsar",
+                    "value": "amritsar"
+                  },
+                  {
+                    "text": "Ludhiana",
+                    "value": "ludhiana"
+                  }
+                ]
+              },
+              {
+                "name": "description",
+                "id": "description",
+                "type": "text",
+                "component": "input-field",
+                "placeholder": "",
+                "label": "Description"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "form-section-2",
+        "component": "form-section",
+        "title": "Section 2",
+        "fields": [
+          {
+            "name": "fullName",
+            "id": "fullName",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "John Doe",
+            "label": "Full Name"
+          },
+          {
+            "name": "email",
+            "id": "email",
+            "type": "email",
+            "component": "input-field",
+            "placeholder": "john.doe@egovernments.com",
+            "label": "Email Address"
+          },
+          {
+            "name": "phoneNumber",
+            "id": "phoneNumber",
+            "type": "tel",
+            "component": "input-field",
+            "placeholder": "12345678",
+            "label": "Phone Number"
+          },
+          {
+            "name": "title",
+            "id": "title",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "",
+            "label": "Title"
+          },
+          {
+            "name": "description",
+            "id": "description",
+            "type": "text",
+            "component": "input-field",
+            "placeholder": "",
+            "label": "Description"
+          }
+        ]
+      },
+      {
+        "name": "submit",
+        "id": "submit",
+        "type": "button",
+        "component": "button",
+        "placeholder": "",
+        "text": "Save and continue"
+      }
+    ]
   }
 ]

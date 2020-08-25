@@ -1,0 +1,36 @@
+$govuk-assets-path: "~govuk-frontend/govuk/assets/";
+@import "node_modules/govuk-frontend/govuk/all";
+
+.egov-width-container {
+  @extend .govuk-width-container;
+  clear: both;
+}
+
+.egov-btn {
+  @extend .govuk-button;
+}
+.egov-heading {
+  @extend .govuk-heading-l;
+}
+
+.egov-form-group {
+  @extend .govuk-form-group;
+}
+
+.egov-label {
+  @extend .govuk-label;
+}
+
+.egov-input {
+  @extend .govuk-input;
+}
+
+.egov-two-thirds {
+  @extend .govuk-\!-width-two-thirds;
+}
+
+.repeat-group {
+  background-color: lightgray;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
