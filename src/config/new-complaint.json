@@ -1,5 +1,4 @@
-[
-  {
+[{
     "id": "header",
     "component": "header",
     "text": "form example"
@@ -8,13 +7,11 @@
     "id": "form",
     "component": "form",
     "submit": "form-submit",
-    "fields": [
-      {
+    "fields": [{
         "id": "form-section-1",
         "component": "form-section",
         "title": "Section 1",
-        "fields": [
-          {
+        "fields": [{
             "name": "fullName",
             "id": "fullName",
             "type": "text",
@@ -60,15 +57,13 @@
             "component": "form-section-repeat-group",
             "min": 1,
             "max": 5,
-            "fields": [
-              {
+            "fields": [{
                 "name": "ulb",
                 "id": "ulb",
                 "component": "input-select",
                 "placeholder": "",
                 "label": "City",
-                "options": [
-                  {
+                "options": [{
                     "text": "Amritsar",
                     "value": "amritsar"
                   },
@@ -94,8 +89,7 @@
         "id": "form-section-2",
         "component": "form-section",
         "title": "Section 2",
-        "fields": [
-          {
+        "fields": [{
             "name": "fullName",
             "id": "fullName",
             "type": "text",
@@ -140,7 +134,7 @@
       {
         "name": "submit",
         "id": "submit",
-        "type": "button",
+        "type": "submit",
         "component": "button",
         "placeholder": "",
         "text": "Save and continue"
