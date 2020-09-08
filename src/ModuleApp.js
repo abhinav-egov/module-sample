@@ -7,28 +7,24 @@ import App from "./App";
 import Pages from "./@egovernments/digit-utils/enums/Pages";
 import mergeConfig from "./@egovernments/digit-utils/config/mergeConfig";
 
-// const getMergedConfig = (defaultConfig, delta) => {
-//   return defaultConfig;
-// };
+const getMergedConfig = (defaultConfig, deltaConfig) => {
+  let mergedConfigObj = defaultConfig;
+  for (const key in deltaConfig) {
+    if (deltaConfig.hasOwnProperty(key)) {
+      const mergedConfig = mergeConfig(defaultConfig[key], deltaConfig[key]);
+      mergedConfigObj[key] = mergedConfig;
+    }
+  }
+  return defaultConfig;
+};
 
 const ModuleApp = ({ deltaConfig }) => {
   let defaultConfig = {
     [Pages.PGR_LIST]: {},
     [Pages.PGR_NEW_COMPLAINT]: newComplaintConfig,
   };
-  // let mergesConfigPgr = mergeConfig(
-  //   defaultConfig["pgr-new-complaint"],
-  //   deltaConfig
-  // );
-  defaultConfig = {
-    [Pages.PGR_LIST]: {},
-    [Pages.PGR_NEW_COMPLAINT]: mergeConfig(
-      defaultConfig["pgr-new-complaint"],
-      deltaConfig
-    ),
-  };
   return (
-    <Provider store={getStore(defaultConfig)}>
+    <Provider store={getStore(getMergedConfig(defaultConfig, deltaConfig))}>
       <App />
     </Provider>
   );
