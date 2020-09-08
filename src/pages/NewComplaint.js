@@ -1,5 +1,5 @@
-import React, { useMemo } from "react"
-import { useForm } from 'react-hook-form'
+import React, { useMemo } from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
 import Pages from "../@egovernments/digit-utils/enums/Pages";
@@ -9,20 +9,22 @@ import { GetFunction, RegisterFunction } from "../FunctionRegistry";
 import { Renderer } from "../Renderer";
 
 const NewComplaintPage = () => {
-  const state = useSelector(state => state.formData)
-  const pageConfig = useSelector(state => state.config[Pages.PGR_NEW_COMPLAINT])
-  const { handleSubmit, register } = useForm({ defaultValues: {} })
+  const state = useSelector((state) => state.formData);
+  const pageConfig = useSelector(
+    (state) => state.config[Pages.PGR_NEW_COMPLAINT]
+  );
+  const { handleSubmit, register } = useForm({ defaultValues: {} });
   const dispatch = useDispatch();
 
-  const handleOnChange = field => event => {
+  const handleOnChange = (field) => (event) => {
     const { value } = event.target;
-    dispatch({ type: "UPDATE_FEILD", payload: { field, value } })
-  }
+    dispatch({ type: "UPDATE_FEILD", payload: { field, value } });
+  };
 
-  const handleRepeatClick = field => event => {
+  const handleRepeatClick = (field) => (event) => {
     event.preventDefault();
-    dispatch({ type: "UPDATE_REPEAT", payload: { field } })
-  }
+    dispatch({ type: "UPDATE_REPEAT", payload: { field } });
+  };
 
   // const handleSubmit = data => {
   //   // e && e.preventDefault();
@@ -30,9 +32,9 @@ const NewComplaintPage = () => {
   // }
   // RegisterFunction('form-submit', handleSubmit);
 
-  const onSubmit = data => {
-    console.log('form', data)
-  }
+  const onSubmit = (data) => {
+    console.log("form", data);
+  };
 
   const configParams = {
     config: pageConfig,
@@ -40,14 +42,12 @@ const NewComplaintPage = () => {
     repeatClicked: handleRepeatClick,
     handlesubmit: handleSubmit,
     register,
-    onSubmit
-  }
+    onSubmit,
+  };
 
   const config = useMemo(() => {
     return getConfig(ComponentMap, GetFunction, configParams);
   }, [configParams]);
-
-  console.log(config);
 
   return (
     <div className="govuk-width-container">
@@ -56,8 +56,7 @@ const NewComplaintPage = () => {
         <Renderer config={config} />
       </div>
     </div>
-
   );
-}
+};
 
 export default NewComplaintPage;
