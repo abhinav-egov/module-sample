@@ -26,6 +26,31 @@ const deltaConfig = {
             },
           ],
         },
+        {
+          id: "repeat-group-1",
+          name: "ulb-section",
+          component: "form-section-repeat-group",
+          min: 1,
+          max: 5,
+          fields: [
+            {
+              name: "ulb",
+              id: "ulb",
+              component: "input-select",
+              placeholder: "",
+              label: "City",
+              options: [
+                {
+                  id: "chandigarh",
+                  text: "Chandigarh",
+                  value: "chandigarh",
+                  __action__: "INSERT_AFTER",
+                  __property__: "amritsar",
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],

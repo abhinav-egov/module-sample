@@ -69,10 +69,12 @@
                 "label": "City",
                 "options": [
                   {
+                    "id": "amritsar",
                     "text": "Amritsar",
                     "value": "amritsar"
                   },
                   {
+                    "id": "ludhiana",
                     "text": "Ludhiana",
                     "value": "ludhiana"
                   }
