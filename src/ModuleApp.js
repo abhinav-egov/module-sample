@@ -15,7 +15,7 @@ const getMergedConfig = (defaultConfig, deltaConfig) => {
       mergedConfigObj[key] = mergedConfig;
     }
   }
-  return defaultConfig;
+  return mergedConfigObj;
 };
 
 const ModuleApp = ({ deltaConfig }) => {
