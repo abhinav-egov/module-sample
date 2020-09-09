@@ -16,7 +16,7 @@ const MergeConfigObj = (defaultConfig, deltaConfig) => {
 
 const processStateConfig = (deltaConfig) => {
   if (Array.isArray(deltaConfig)) {
-    deltaConfig.map((forms) => {
+    deltaConfig.forEach((forms) => {
       sectionToBeUpdated = {};
       InitSectionToUpdate(forms);
     });
@@ -36,7 +36,7 @@ const InitSectionToUpdate = (forms) => {
     findSectionById(selectedProperty, currentUpdatableSection);
     seachInDefaultConfig(forms.__property__, forms);
   } else if (Array.isArray(forms)) {
-    forms.map((form) => {
+    forms.forEach((form) => {
       InitSectionToUpdate(form);
     });
   } else if (configUtils.ifObjectContainsArray(forms).hasArray) {
@@ -84,12 +84,12 @@ const findSectionById = (id, currentUpdatableSection) => {
 
 const seachInDefaultConfig = (id, action) => {
   if (!Array.isArray(sectionToBeUpdated) && !sectionToBeUpdated.id) {
-    throw "id not found";
+    throw new Error("id not found");
   }
   if (sectionToBeUpdated.id === id) {
     actionHandler(action, id, sectionToBeUpdated);
   } else if (Array.isArray(sectionToBeUpdated)) {
-    sectionToBeUpdated.map((section) => {
+    sectionToBeUpdated.forEach((section) => {
       if (section.id === id) {
         actionHandler(action, id, sectionToBeUpdated);
       }
@@ -134,7 +134,7 @@ const getIndex = (propertyValue, fields) => {
 };
 
 const insertAt = (index, data, fields) => {
- 
+
   if (!data.id) {
     throw new Error("id is required is required to insert a record");
   }
@@ -143,7 +143,7 @@ const insertAt = (index, data, fields) => {
 
 const updateAt = (index, data, fields) => {
   if (fields[index].id !== data.id) {
-    throw `id ${data.id} not matched`;
+    throw new Error(`id ${data.id} not matched`);
   }
   fields[index] = { ...fields[index], ...data };
 };

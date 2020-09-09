@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Pages from "../@egovernments/digit-utils/enums/Pages";
 import { getConfig } from "../@egovernments/digit-utils/config";
 import ComponentMap from "../ComponentMap";
-import { GetFunction, RegisterFunction } from "../FunctionRegistry";
+import { GetFunction } from "../FunctionRegistry";
 import { Renderer } from "../Renderer";
 
 const NewComplaintPage = () => {
@@ -16,10 +16,10 @@ const NewComplaintPage = () => {
   const { handleSubmit, register } = useForm({ defaultValues: {} });
   const dispatch = useDispatch();
 
-  const handleOnChange = (field) => (event) => {
-    const { value } = event.target;
-    dispatch({ type: "UPDATE_FEILD", payload: { field, value } });
-  };
+  // const handleOnChange = (field) => (event) => {
+  //   const { value } = event.target;
+  //   dispatch({ type: "UPDATE_FEILD", payload: { field, value } });
+  // };
 
   const handleRepeatClick = (field) => (event) => {
     event.preventDefault();
