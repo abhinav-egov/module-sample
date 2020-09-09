@@ -10,13 +10,26 @@ const CityMohalla = ({ children, ...props }) => {
     { name: "Ludiyana" },
   ]);
 
-  // const [mohalla, setMohalla] = useState([
-  //   { name: "Amritsar" },
-  //   { name: "Ludiyana" },
-  // ]);
+  const [mohalla, setMohalla1] = useState([
+    { name: "Mohalla1" },
+    { name: "Mohall2" },
+  ]);
+
+  const [mohalla2, setMohalla2] = useState([
+    { name: "Mohalla3" },
+    { name: "Mohall4" },
+  ]);
+
+  const [allMohalla, setMohalla] = useState([]);
+
   // const [mohalla, setMohalla] = useState(["Amritsar", "ludhiyana"]);
-  const handleCityChange = () => {
-    console.log("hiiiiiiiiiiiiiii");
+  const handleCityChange = (e) => {
+    console.log(e.target.value);
+    if (e.target.value === "Amritsar") {
+      setMohalla([...mohalla]);
+    } else {
+      setMohalla([...mohalla2]);
+    }
   };
 
   console.log("city-mohalla");
@@ -33,7 +46,7 @@ const CityMohalla = ({ children, ...props }) => {
       ></Select>
       <Select
         id="inputGroupSelect02"
-        options={cities.map((city, index) => ({
+        options={mohalla.map((city, index) => ({
           value: city.name,
           text: city.name,
         }))}
