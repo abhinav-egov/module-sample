@@ -17,16 +17,18 @@ const mapPropsToConfig = (config) => {
 };
 
 export const Renderer = ({ config }) => {
+  console.log("config-----------------------------------------", config);
   if (!config) {
     throw new Error("You are calling Renderer with no config.");
   }
 
   const configWithProps = mapPropsToConfig(config);
-
+  //console.log("configWithProps------->", configWithProps);
   const renderComponents = (items) => {
     return items.map((item) => {
       const { Component, fields, ...props } = item;
-    
+      console.log("Component props------->", props);
+      // console.log("Component------->", Component);
       if (fields && fields.length > 1) {
         return (
           <Fragment key={props.name || props.id}>

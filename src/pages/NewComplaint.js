@@ -26,6 +26,10 @@ const NewComplaintPage = () => {
     dispatch({ type: "UPDATE_REPEAT", payload: { field } });
   };
 
+  const handleCityChange = () => {
+    console.log("hiiiiiiii");
+  };
+
   // const handleSubmit = data => {
   //   // e && e.preventDefault();
   //   console.log("state", state, data);
@@ -41,11 +45,20 @@ const NewComplaintPage = () => {
     state,
     repeatClicked: handleRepeatClick,
     handlesubmit: handleSubmit,
+    onChange: handleCityChange,
     register,
     onSubmit,
   };
 
   const config = useMemo(() => {
+    console.log(
+      "get config-----------------------",
+      ComponentMap,
+      "get config 2-----------------------",
+      GetFunction,
+      "get config 3-----------------------",
+      configParams
+    );
     return getConfig(ComponentMap, GetFunction, configParams);
   }, [configParams]);
 

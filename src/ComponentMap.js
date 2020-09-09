@@ -8,11 +8,11 @@ import FormSectionRepeatGroup from "./components/FormSectionRepeatGroup";
 import Header from "./components/Header";
 
 export default {
-  'input-field': InputField,
-  'input-select': Select,
-  'header': Header,
-  'form': Form,
-  'form-section': FormSection,
-  'form-section-repeat-group': FormSectionRepeatGroup,
-  'button': Button
-}
+  "input-field": InputField,
+  "input-select": Select,
+  header: Header,
+  form: Form,
+  "form-section": FormSection,
+  "form-section-repeat-group": FormSectionRepeatGroup,
+  button: Button,
+};

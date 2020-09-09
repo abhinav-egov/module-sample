@@ -112,6 +112,27 @@
             "component": "input-field",
             "placeholder": "john.doe@egovernments.com",
             "label": "Email Address"
+          },
+
+          {
+            "name": "city",
+            "id": "city",
+            "component": "input-select",
+            "placeholder": "",
+            "label": "City",
+            "onChange": "handleCityChange",
+            "options": [
+              {
+                "id": "amritsar",
+                "text": "Amritsar",
+                "value": "amritsar"
+              },
+              {
+                "id": "ludhiana",
+                "text": "Ludhiana",
+                "value": "ludhiana"
+              }
+            ]
           }
         ]
       },
