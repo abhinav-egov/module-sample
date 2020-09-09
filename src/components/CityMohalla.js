@@ -5,7 +5,16 @@ import { useSelector } from "react-redux";
 const CityMohalla = ({ children, ...props }) => {
   const state = useSelector((state) => state.formData);
   console.log("State==============>", state);
-  const [cities, setcities] = useState(["Amritsar", "ludhiyana"]);
+  const [cities, setcities] = useState([
+    { name: "Amritsar" },
+    { name: "Ludiyana" },
+  ]);
+
+  // const [mohalla, setMohalla] = useState([
+  //   { name: "Amritsar" },
+  //   { name: "Ludiyana" },
+  // ]);
+  // const [mohalla, setMohalla] = useState(["Amritsar", "ludhiyana"]);
   const handleCityChange = () => {
     console.log("hiiiiiiiiiiiiiii");
   };
@@ -17,11 +26,18 @@ const CityMohalla = ({ children, ...props }) => {
       <Select
         id="inputGroupSelect01"
         onChange={handleCityChange}
-        options={cities.map((city, index) => (
-          { value: city, text: city }
-        ))}
-      >
-      </Select>
+        options={cities.map((city, index) => ({
+          value: city.name,
+          text: city.name,
+        }))}
+      ></Select>
+      <Select
+        id="inputGroupSelect02"
+        options={cities.map((city, index) => ({
+          value: city.name,
+          text: city.name,
+        }))}
+      ></Select>
       {/* <select onChange={handleCityChange}>
         <option value="">Choose...</option>
         {localityKeys.map((locality, index) => (
