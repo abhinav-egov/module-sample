@@ -46,7 +46,7 @@ const CityMohalla = ({ children, ...props }) => {
       ></Select>
       <Select
         id="inputGroupSelect02"
-        options={mohalla.map((city, index) => ({
+        options={allMohalla.map((city, index) => ({
           value: city.name,
           text: city.name,
         }))}
