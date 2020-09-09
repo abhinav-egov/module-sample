@@ -98,41 +98,9 @@
         "title": "Section 2",
         "fields": [
           {
-            "name": "fullName",
-            "id": "fullName",
-            "type": "text",
-            "component": "input-field",
-            "placeholder": "John Doe",
-            "label": "Full Name"
-          },
-          {
-            "name": "email",
-            "id": "email",
-            "type": "email",
-            "component": "input-field",
-            "placeholder": "john.doe@egovernments.com",
-            "label": "Email Address"
-          },
-
-          {
-            "name": "city",
-            "id": "city",
-            "component": "input-select",
-            "placeholder": "",
-            "label": "City",
-            "onChange": "handleCityChange",
-            "options": [
-              {
-                "id": "amritsar",
-                "text": "Amritsar",
-                "value": "amritsar"
-              },
-              {
-                "id": "ludhiana",
-                "text": "Ludhiana",
-                "value": "ludhiana"
-              }
-            ]
+            "id": "city-mohalla",
+            "name": "city-mohalla",
+            "component": "city-mohalla"
           }
         ]
       },
