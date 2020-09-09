@@ -6,7 +6,6 @@ export const getConfig = (
   if (!config || config.length === 0) return [];
   console.log("config---->", config);
   return config.map((item) => {
-    console.log("items------------------>", item);
     const { component, name, fields, submit, ...props } = item;
     return {
       ...props,

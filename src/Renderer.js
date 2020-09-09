@@ -27,7 +27,7 @@ export const Renderer = ({ config }) => {
   const renderComponents = (items) => {
     return items.map((item) => {
       const { Component, fields, ...props } = item;
-      console.log("Component props------->", props);
+      // console.log("Component props------->", props);
       // console.log("Component------->", Component);
       if (fields && fields.length > 1) {
         return (
