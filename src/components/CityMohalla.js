@@ -10,18 +10,18 @@ const CityMohalla = ({ children, ...props }) => {
     console.log("hiiiiiiiiiiiiiii");
   };
 
+  console.log("city-mohalla");
+
   return (
     <Fragment>
-      <select
-        className="custom-select"
+      <Select
         id="inputGroupSelect01"
         onChange={handleCityChange}
-      >
-        <option value="">Choose...</option>
-        {cities.map((city, index) => (
-          <option key={index} value={city}></option>
+        options={cities.map((city, index) => (
+          { value: city, text: city }
         ))}
-      </select>
+      >
+      </Select>
       {/* <select onChange={handleCityChange}>
         <option value="">Choose...</option>
         {localityKeys.map((locality, index) => (

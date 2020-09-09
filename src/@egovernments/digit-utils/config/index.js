@@ -4,7 +4,7 @@ export const getConfig = (
   { config, state, repeatClicked, handlesubmit, register, onSubmit }
 ) => {
   if (!config || config.length === 0) return [];
-  console.log("config---->", config);
+  // console.log("config---->", config);
   return config.map((item) => {
     const { component, name, fields, submit, ...props } = item;
     return {
@@ -13,13 +13,13 @@ export const getConfig = (
       fields:
         fields && fields.length > 0
           ? getConfig(ComponentMap, GetFunction, {
-              config: fields,
-              state,
-              repeatClicked,
-              handlesubmit,
-              register,
-              onSubmit,
-            })
+            config: fields,
+            state,
+            repeatClicked,
+            handlesubmit,
+            register,
+            onSubmit,
+          })
           : null,
       name,
       value: state[name],

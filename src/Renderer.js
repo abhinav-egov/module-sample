@@ -17,7 +17,7 @@ const mapPropsToConfig = (config) => {
 };
 
 export const Renderer = ({ config }) => {
-  console.log("config-----------------------------------------", config);
+  // console.log("config-----------------------------------------", config);
   if (!config) {
     throw new Error("You are calling Renderer with no config.");
   }

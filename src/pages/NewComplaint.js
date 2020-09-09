@@ -51,17 +51,10 @@ const NewComplaintPage = () => {
   };
 
   const config = useMemo(() => {
-    console.log(
-      "get config-----------------------",
-      ComponentMap,
-      "get config 2-----------------------",
-      GetFunction,
-      "get config 3-----------------------",
-      configParams
-    );
     return getConfig(ComponentMap, GetFunction, configParams);
   }, [configParams]);
 
+  console.log('config', config);
   return (
     <div className="govuk-width-container">
       <h1 className="egov-heading">eGov PGR</h1>
