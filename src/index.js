@@ -19,7 +19,7 @@ const deltaConfig = {
               name: "plot type",
               type: "text",
               component: "input-field",
-              placeholder: "ploy type",
+              placeholder: "Plot type",
               label: "Plot Type",
               __action__: "INSERT_AFTER",
               __property__: "fullName",
