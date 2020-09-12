@@ -4,6 +4,7 @@ import "./index.scss";
 
 import ListPage from "./pages/List";
 import NewComplaintPage from "./pages/NewComplaint";
+import "./i18n";
 
 const Header = () => (
   <div>

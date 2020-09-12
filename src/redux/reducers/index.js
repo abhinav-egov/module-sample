@@ -1,32 +1,118 @@
-import { combineReducers } from "redux"
+import { combineReducers } from "redux";
 import ConfigActionTypes from "../../@egovernments/digit-utils/enums/ConfigActionTypes";
+import {
+  FETCH_CITIES,
+  FETCH_LOCALITIES,
+  FETCH_LOCALIZATION_KEYS_PGR,
+  UPDATE_I18nStore_CITY_PGR,
+  FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
+  UPDATE_I18nStore_LOCALITY_PGR,
+} from "../actions/types";
+import {
+  GetCityLocalizationKeysFromPGR,
+  TransformData,
+  GetCityLocalizationMap,
+  GetLocalityLocalizationKeysFromPGR,
+  GetLocalityDropDownList,
+} from "../utils/pgrUtils";
+import { runTimeTranslations } from "../../i18n";
 
-const configReducer = defaultConfig => (state = defaultConfig, action) => {
+const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
   console.log(action);
   switch (action.type) {
-    case ConfigActionTypes.CONFIG_UPDATE: return [...state, action.payload]
-    default: return state;
+    case ConfigActionTypes.CONFIG_UPDATE:
+      return [...state, action.payload];
+    default:
+      return state;
   }
-}
+};
 
 const formDataReducer = (state = {}, action) => {
   switch (action.type) {
     case "UPDATE_REPEAT":
       const stateKey = `${action.payload.field}-repeats`;
       const prevValue = state[stateKey] || 1;
-      return { ...state, [stateKey]: prevValue + 1 }
+      return { ...state, [stateKey]: prevValue + 1 };
     case "UPDATE_FEILD":
-      return { ...state, [action.payload.field]: action.payload.value }
+      return { ...state, [action.payload.field]: action.payload.value };
     default:
       return state;
   }
-}
+};
 
+const cityReducer = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_CITIES:
+      let cityKeys = GetCityLocalizationKeysFromPGR(action.payload);
+      return { ...state, citiKeys: [...cityKeys] };
+    case UPDATE_I18nStore_CITY_PGR:
+      let { payload } = action;
+      let cityKeyMap = GetCityLocalizationMap(payload.cities, payload.pgrKeys);
+      runTimeTranslations(cityKeyMap, "en");
+      return {
+        ...state,
+        cityKeyMap,
+      };
+    default:
+      return state;
+  }
+};
 
-const getRootReducer = defaultConfig => combineReducers({
-  config: configReducer(defaultConfig),
-  formData: formDataReducer
+const localityReducer = (state = [], action) => {
+  // console.log("action----------------------->", action);
+  switch (action.type) {
+    case FETCH_LOCALITIES:
+      let tenantBoundry = action.payload.response;
+      let code =
+        tenantBoundry.tenantId.replace(".", "_").toUpperCase() +
+        "_" +
+        tenantBoundry.hierarchyType.code;
+      return {
+        ...state,
+        localityResponse: {
+          localityData: [...tenantBoundry.boundary],
+          city: action.payload.city.toLowerCase(),
+          code,
+        },
+      };
+    case FETCH_LOCALITY_LOCALIZATION_KEYS_PGR:
+      return {
+        ...state,
+        localityLocalizationKeysPGR: TransformData(action.payload),
+      };
+    case UPDATE_I18nStore_LOCALITY_PGR:
+      console.log("here---------i m", action);
+      const { code: cityCode, boundries, pgrKeys } = action.payload;
+      let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(
+        cityCode,
+        boundries,
+        pgrKeys
+      );
+      console.log("LocalityLocalizationKeys--->", localityLocalizationKeys);
+      runTimeTranslations(localityLocalizationKeys, "en");
+      const localityList = GetLocalityDropDownList(localityLocalizationKeys);
+      return { ...state, localityList: [...localityList] };
+    default:
+      return state;
+  }
+};
 
-})
+const PGRKeysReducer = (state = [], action) => {
+  switch (action.type) {
+    case FETCH_LOCALIZATION_KEYS_PGR:
+      return { ...state, pgrKeys: TransformData(action.payload) };
+    default:
+      return state;
+  }
+};
+
+const getRootReducer = (defaultConfig) =>
+  combineReducers({
+    config: configReducer(defaultConfig),
+    formData: formDataReducer,
+    cities: cityReducer,
+    localities: localityReducer,
+    pgrKeys: PGRKeysReducer,
+  });
 
 export default getRootReducer;

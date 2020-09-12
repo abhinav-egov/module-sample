@@ -26,10 +26,6 @@ const NewComplaintPage = () => {
     dispatch({ type: "UPDATE_REPEAT", payload: { field } });
   };
 
-  const handleCityChange = () => {
-    console.log("hiiiiiiii");
-  };
-
   // const handleSubmit = data => {
   //   // e && e.preventDefault();
   //   console.log("state", state, data);
@@ -45,7 +41,7 @@ const NewComplaintPage = () => {
     state,
     repeatClicked: handleRepeatClick,
     handlesubmit: handleSubmit,
-    onChange: handleCityChange,
+    // onChange: handleCityChange,
     register,
     onSubmit,
   };
@@ -54,7 +50,7 @@ const NewComplaintPage = () => {
     return getConfig(ComponentMap, GetFunction, configParams);
   }, [configParams]);
 
-  console.log('config', config);
+  console.log("config", config);
   return (
     <div className="govuk-width-container">
       <h1 className="egov-heading">eGov PGR</h1>

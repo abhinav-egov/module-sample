@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 // import './index.scss';
 import PGRApp from "./ModuleApp";
@@ -58,7 +58,9 @@ const deltaConfig = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <PGRApp deltaConfig={deltaConfig} />
+    <Suspense fallback={null}>
+      <PGRApp deltaConfig={deltaConfig} />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );
