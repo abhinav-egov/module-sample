@@ -25,11 +25,7 @@ const RequestBody = {
     moduleDetails: [
       {
         moduleName: "common-masters",
-        masterDetails: [
-          { name: "Department" },
-          { name: "Designation" },
-          { name: "StateInfo" },
-        ],
+        masterDetails: [{ name: "Department" }, { name: "Designation" }, { name: "StateInfo" }],
       },
       {
         moduleName: "tenant",
@@ -54,11 +50,7 @@ const localityBody = {
 
 //action creator
 export const fetchCities = () => async (dispatch, getState) => {
-  let response = await request(
-    "https://egov-micro-qa.egovernments.org/egov-mdms-service/v1/_search?tenantId=pb.amritsar",
-    RequestBody,
-    "post"
-  );
+  let response = await request("/egov-mdms-service/v1/_search?tenantId=pb.amritsar", RequestBody, "post");
   dispatch({
     type: FETCH_CITIES,
     payload: response.data.MdmsRes.tenant.citymodule,
@@ -67,7 +59,7 @@ export const fetchCities = () => async (dispatch, getState) => {
 
 export const fetchLocalities = (city) => async (dispatch) => {
   let response = await request(
-    `https://egov-micro-qa.egovernments.org/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=pb.${city.toLowerCase()}`,
+    `/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=pb.${city.toLowerCase()}`,
     localityBody,
     "post"
   );
@@ -91,7 +83,7 @@ export const getLocalizationKeyPGR = (lng = "en") => async (dispatch) => {
     },
   };
   const response = await request(
-    `https://egov-micro-qa.egovernments.org/localization/messages/v1/_search?module=rainmaker-common,rainmaker-pgr&locale=${lng}_IN&tenantId=pb`,
+    `/localization/messages/v1/_search?module=rainmaker-common,rainmaker-pgr&locale=${lng}_IN&tenantId=pb`,
     data,
     "post"
   );
@@ -118,7 +110,7 @@ export const getLocalityKeysPGR = () => async (dispatch, getState) => {
     },
   };
   let response = await request(
-    `https://egov-micro-qa.egovernments.org/localization/messages/v1/_search?module=rainmaker-pb.${tenant}&locale=${lng}_IN&tenantId=pb.${tenant}`,
+    `/localization/messages/v1/_search?module=rainmaker-pb.${tenant}&locale=${lng}_IN&tenantId=pb.${tenant}`,
     data,
     "post"
   );
@@ -130,11 +122,7 @@ export const getLocalityKeysPGR = () => async (dispatch, getState) => {
 
 export const updateLocalityMapToi18n = () => (dispatch, getState) => {
   //console.log("CREATE_LOCALITY_DROPDOWN---->", getState());
-  let {
-    code,
-    city,
-    localityData: boundries,
-  } = getState().localities.localityResponse;
+  let { code, city, localityData: boundries } = getState().localities.localityResponse;
 
   let pgrKeys = getState().localities.localityLocalizationKeysPGR;
 
