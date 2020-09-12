@@ -54,7 +54,6 @@ const localityBody = {
 
 //action creator
 export const fetchCities = () => async (dispatch, getState) => {
-  console.log("fetch cities action is called-----------------");
   let response = await request(
     "https://egov-micro-qa.egovernments.org/egov-mdms-service/v1/_search?tenantId=pb.amritsar",
     RequestBody,

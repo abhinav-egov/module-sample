@@ -42,9 +42,7 @@ let i18nextConfig = {
 };
 
 export const runTimeTranslations = (runTimeData, lng) => {
-  console.log("adding new traslation--->", runTimeData);
   i18next.addResources(lng, i18nextConfig.ns[0], runTimeData);
-  console.log("runTimeTranslations--> ", i18next.getDataByLanguage(lng));
   // i18next.reloadResources(null, i18nextConfig.ns[0]);
 };
 

@@ -27,6 +27,13 @@ const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
   }
 };
 
+const langReducer = (defaltLanguages) => (state = defaltLanguages, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
 const formDataReducer = (state = {}, action) => {
   switch (action.type) {
     case "UPDATE_REPEAT":
@@ -81,14 +88,12 @@ const localityReducer = (state = [], action) => {
         localityLocalizationKeysPGR: TransformData(action.payload),
       };
     case UPDATE_I18nStore_LOCALITY_PGR:
-      console.log("here---------i m", action);
       const { code: cityCode, boundries, pgrKeys } = action.payload;
       let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(
         cityCode,
         boundries,
         pgrKeys
       );
-      console.log("LocalityLocalizationKeys--->", localityLocalizationKeys);
       runTimeTranslations(localityLocalizationKeys, "en");
       const localityList = GetLocalityDropDownList(localityLocalizationKeys);
       return { ...state, localityList: [...localityList] };
@@ -106,13 +111,14 @@ const PGRKeysReducer = (state = [], action) => {
   }
 };
 
-const getRootReducer = (defaultConfig) =>
+const getRootReducer = (defaultConfig, languageConfig) =>
   combineReducers({
     config: configReducer(defaultConfig),
     formData: formDataReducer,
     cities: cityReducer,
     localities: localityReducer,
     pgrKeys: PGRKeysReducer,
+    languages: langReducer(languageConfig),
   });
 
 export default getRootReducer;

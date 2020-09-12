@@ -1,10 +1,11 @@
 export const getConfig = (
   ComponentMap,
   GetFunction,
-  { config, state, repeatClicked, handlesubmit, register, onSubmit }
+  { config, state, repeatClicked, handlesubmit, register, onSubmit },
+  t
 ) => {
   if (!config || config.length === 0) return [];
-  // console.log("config---->", config);
+  // console.log(" t---->", t);
   return config.map((item) => {
     const { component, name, fields, submit, ...props } = item;
     return {
@@ -12,14 +13,19 @@ export const getConfig = (
       // submit: submit ? GetFunction(submit) : undefined,
       fields:
         fields && fields.length > 0
-          ? getConfig(ComponentMap, GetFunction, {
-            config: fields,
-            state,
-            repeatClicked,
-            handlesubmit,
-            register,
-            onSubmit,
-          })
+          ? getConfig(
+              ComponentMap,
+              GetFunction,
+              {
+                config: fields,
+                state,
+                repeatClicked,
+                handlesubmit,
+                register,
+                onSubmit,
+              },
+              t
+            )
           : null,
       name,
       value: state[name],
@@ -35,6 +41,7 @@ export const getConfig = (
         component === "input-select" || component === "input-field"
           ? register
           : null,
+      t: component === "city-mohalla" ? t : null,
       // onChange: component === 'input-field' ? onChange(name) : null,
       component: ComponentMap[component],
     };

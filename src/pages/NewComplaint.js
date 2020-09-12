@@ -8,7 +8,7 @@ import ComponentMap from "../ComponentMap";
 import { GetFunction } from "../FunctionRegistry";
 import { Renderer } from "../Renderer";
 
-const NewComplaintPage = () => {
+const NewComplaintPage = ({ t }) => {
   const state = useSelector((state) => state.formData);
   const pageConfig = useSelector(
     (state) => state.config[Pages.PGR_NEW_COMPLAINT]
@@ -47,10 +47,9 @@ const NewComplaintPage = () => {
   };
 
   const config = useMemo(() => {
-    return getConfig(ComponentMap, GetFunction, configParams);
-  }, [configParams]);
+    return getConfig(ComponentMap, GetFunction, configParams, t);
+  }, [configParams, t]);
 
-  console.log("config", config);
   return (
     <div className="govuk-width-container">
       <h1 className="egov-heading">eGov PGR</h1>

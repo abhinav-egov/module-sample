@@ -9,13 +9,14 @@ import {
   getLocalityKeysPGR,
   updateLocalityMapToi18n,
 } from "../redux/actions";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
+import LanguageSelect from "../components/LanguageSelect";
 //import { runTimeTranslations } from "../i18n";
 
 const CityMohalla = ({ children, ...props }) => {
-  // console.log("state in city mohalla-->", state);
+  let { t } = props;
   const dispatch = useDispatch();
-  const { t, i18n } = useTranslation();
+  //const { t, i18n } = useTranslation();
   //const state = useSelector((state) => state);
   const citysKeyVal = useSelector((state) => state.cities);
   const pgrKeysVal = useSelector((state) => state.pgrKeys);
@@ -44,19 +45,14 @@ const CityMohalla = ({ children, ...props }) => {
     [dispatch]
   );
 
-  useEffect(() => {
-    i18n.changeLanguage("en");
-  }, [i18n]);
+  // useEffect(() => {
+  //   i18n.changeLanguage("en");
+  // }, [i18n]);
 
   useEffect(() => {
     getCities();
     pgrKeys();
   }, [getCities, pgrKeys]);
-
-  const handleCityChange = (e) => {
-    console.log(e.target.value);
-    getLocalities(e.target.value);
-  };
 
   useEffect(() => {
     if (citysKeyVal.citiKeys && pgrKeysVal.pgrKeys) {
@@ -76,10 +72,15 @@ const CityMohalla = ({ children, ...props }) => {
     }
   }, [localities.localityLocalizationKeysPGR, localityMapToi18n]);
 
+  const handleCityChange = (e) => {
+    getLocalities(e.target.value);
+  };
+
   return (
     <Fragment>
       {citysKeyVal.citiKeys && (
         <>
+          <LanguageSelect />
           <Select
             id="inputGroupSelect01"
             onChange={handleCityChange}
