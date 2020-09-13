@@ -17,33 +17,22 @@ const CityMohalla = ({ children, ...props }) => {
   let { t } = props;
   const dispatch = useDispatch();
   //const { t, i18n } = useTranslation();
-  //const state = useSelector((state) => state);
+  const state = useSelector((state) => state);
   const citysKeyVal = useSelector((state) => state.cities);
   const pgrKeysVal = useSelector((state) => state.pgrKeys);
   const localities = useSelector((state) => state.localities);
 
   const getCities = useCallback(() => dispatch(fetchCities()), [dispatch]);
 
-  const pgrKeys = useCallback(() => dispatch(getLocalizationKeyPGR()), [
-    dispatch,
-  ]);
+  const pgrKeys = useCallback(() => dispatch(getLocalizationKeyPGR()), [dispatch]);
 
-  const updateCityMap = useCallback(() => dispatch(updateCityMapToi18n()), [
-    dispatch,
-  ]);
+  const updateCityMap = useCallback(() => dispatch(updateCityMapToi18n()), [dispatch]);
 
-  const getLocalities = useCallback((city) => dispatch(fetchLocalities(city)), [
-    dispatch,
-  ]);
+  const getLocalities = useCallback((city) => dispatch(fetchLocalities(city)), [dispatch]);
 
-  const localityKeysPGR = useCallback(() => dispatch(getLocalityKeysPGR()), [
-    dispatch,
-  ]);
+  const localityKeysPGR = useCallback(() => dispatch(getLocalityKeysPGR()), [dispatch]);
 
-  const localityMapToi18n = useCallback(
-    () => dispatch(updateLocalityMapToi18n()),
-    [dispatch]
-  );
+  const localityMapToi18n = useCallback(() => dispatch(updateLocalityMapToi18n()), [dispatch]);
 
   // useEffect(() => {
   //   i18n.changeLanguage("en");
@@ -52,25 +41,25 @@ const CityMohalla = ({ children, ...props }) => {
   useEffect(() => {
     getCities();
     pgrKeys();
-  }, [getCities, pgrKeys]);
+  }, [getCities, pgrKeys, state.currentLanguage]);
 
   useEffect(() => {
     if (citysKeyVal.citiKeys && pgrKeysVal.pgrKeys) {
       updateCityMap();
     }
-  }, [citysKeyVal.citiKeys, pgrKeysVal.pgrKeys, updateCityMap]);
+  }, [citysKeyVal.citiKeys, pgrKeysVal.pgrKeys, updateCityMap, state.currentLanguage]);
 
   useEffect(() => {
     if (localities.localityResponse) {
       localityKeysPGR();
     }
-  }, [localities.localityResponse, localityKeysPGR]);
+  }, [localities.localityResponse, localityKeysPGR, state.currentLanguage]);
 
   useEffect(() => {
     if (localities.localityLocalizationKeysPGR) {
       localityMapToi18n();
     }
-  }, [localities.localityLocalizationKeysPGR, localityMapToi18n]);
+  }, [localities.localityLocalizationKeysPGR, localityMapToi18n, state.currentLanguage]);
 
   const handleCityChange = (e) => {
     getLocalities(e.target.value);

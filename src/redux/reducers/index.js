@@ -7,6 +7,7 @@ import {
   UPDATE_I18nStore_CITY_PGR,
   FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
   UPDATE_I18nStore_LOCALITY_PGR,
+  CHANGE_LANGUAGE,
 } from "../actions/types";
 import {
   GetCityLocalizationKeysFromPGR,
@@ -18,7 +19,6 @@ import {
 import { runTimeTranslations } from "../../i18n";
 
 const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
-  console.log(action);
   switch (action.type) {
     case ConfigActionTypes.CONFIG_UPDATE:
       return [...state, action.payload];
@@ -53,9 +53,9 @@ const cityReducer = (state = [], action) => {
       let cityKeys = GetCityLocalizationKeysFromPGR(action.payload);
       return { ...state, citiKeys: [...cityKeys] };
     case UPDATE_I18nStore_CITY_PGR:
-      let { payload } = action;
-      let cityKeyMap = GetCityLocalizationMap(payload.cities, payload.pgrKeys);
-      runTimeTranslations(cityKeyMap, "en");
+      let { cities, currentLanguage, pgrKeys } = action.payload;
+      let cityKeyMap = GetCityLocalizationMap(cities, pgrKeys);
+      runTimeTranslations(cityKeyMap, currentLanguage || "en");
       return {
         ...state,
         cityKeyMap,
@@ -70,10 +70,7 @@ const localityReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_LOCALITIES:
       let tenantBoundry = action.payload.response;
-      let code =
-        tenantBoundry.tenantId.replace(".", "_").toUpperCase() +
-        "_" +
-        tenantBoundry.hierarchyType.code;
+      let code = tenantBoundry.tenantId.replace(".", "_").toUpperCase() + "_" + tenantBoundry.hierarchyType.code;
       return {
         ...state,
         localityResponse: {
@@ -88,13 +85,9 @@ const localityReducer = (state = [], action) => {
         localityLocalizationKeysPGR: TransformData(action.payload),
       };
     case UPDATE_I18nStore_LOCALITY_PGR:
-      const { code: cityCode, boundries, pgrKeys } = action.payload;
-      let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(
-        cityCode,
-        boundries,
-        pgrKeys
-      );
-      runTimeTranslations(localityLocalizationKeys, "en");
+      const { code: cityCode, boundries, pgrKeys, currentLanguage } = action.payload;
+      let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(cityCode, boundries, pgrKeys);
+      runTimeTranslations(localityLocalizationKeys, currentLanguage || "en");
       const localityList = GetLocalityDropDownList(localityLocalizationKeys);
       return { ...state, localityList: [...localityList] };
     default:
@@ -111,6 +104,15 @@ const PGRKeysReducer = (state = [], action) => {
   }
 };
 
+const currentLanguage = (state = {}, action) => {
+  switch (action.type) {
+    case CHANGE_LANGUAGE:
+      return { ...state, language: action.payload };
+    default:
+      return state;
+  }
+};
+
 const getRootReducer = (defaultConfig, languageConfig) =>
   combineReducers({
     config: configReducer(defaultConfig),
@@ -118,6 +120,7 @@ const getRootReducer = (defaultConfig, languageConfig) =>
     cities: cityReducer,
     localities: localityReducer,
     pgrKeys: PGRKeysReducer,
+    currentLanguage,
     languages: langReducer(languageConfig),
   });
 

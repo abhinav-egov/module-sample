@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "../@egovernments/react-components/Select";
 import { useTranslation } from "react-i18next";
 
@@ -11,12 +11,13 @@ const LanguageSelect = () => {
 
   const state = useSelector((state) => state);
 
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   //   console.log("lang state--->", state);
   const { supportedLangList } = state.languages;
   const handleLangChange = (e) => {
     i18n.changeLanguage(e.target.value);
+    dispatch({ type: "CHANGE_LANGUAGE", payload: e.target.value });
   };
 
   return (

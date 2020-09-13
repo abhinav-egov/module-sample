@@ -26,12 +26,7 @@ const ModuleApp = ({ deltaConfig }) => {
     [Pages.PGR_NEW_COMPLAINT]: newComplaintConfig,
   };
   return (
-    <Provider
-      store={getStore(
-        getMergedConfig(defaultConfig, deltaConfig),
-        languageConfig
-      )}
-    >
+    <Provider store={getStore(getMergedConfig(defaultConfig, deltaConfig), languageConfig)}>
       <App />
     </Provider>
   );

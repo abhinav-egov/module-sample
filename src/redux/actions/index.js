@@ -69,7 +69,8 @@ export const fetchLocalities = (city) => async (dispatch) => {
   });
 };
 
-export const getLocalizationKeyPGR = (lng = "en") => async (dispatch) => {
+export const getLocalizationKeyPGR = () => async (dispatch, getState) => {
+  const lng = getState().currentLanguage.language ? getState().currentLanguage.language : "en";
   let data = {
     RequestInfo: {
       apiId: "Rainmaker",
@@ -82,6 +83,7 @@ export const getLocalizationKeyPGR = (lng = "en") => async (dispatch) => {
       authToken: "12855721-a7b7-4429-8bc9-f8fea9d0ad98",
     },
   };
+
   const response = await request(
     `/localization/messages/v1/_search?module=rainmaker-common,rainmaker-pgr&locale=${lng}_IN&tenantId=pb`,
     data,
@@ -94,9 +96,9 @@ export const getLocalizationKeyPGR = (lng = "en") => async (dispatch) => {
 };
 
 export const getLocalityKeysPGR = () => async (dispatch, getState) => {
-  //console.log("getState===>", getState().localities.localityResponse.city);
+  const lng = getState().currentLanguage.language ? getState().currentLanguage.language : "en";
   const tenant = getState().localities.localityResponse.city;
-  let lng = "en";
+  // let lng = "en";
   let data = {
     RequestInfo: {
       apiId: "Rainmaker",
@@ -120,22 +122,23 @@ export const getLocalityKeysPGR = () => async (dispatch, getState) => {
   });
 };
 
-export const updateLocalityMapToi18n = () => (dispatch, getState) => {
-  //console.log("CREATE_LOCALITY_DROPDOWN---->", getState());
-  let { code, city, localityData: boundries } = getState().localities.localityResponse;
-
-  let pgrKeys = getState().localities.localityLocalizationKeysPGR;
-
+export const updateCityMapToi18n = () => (dispatch, getState) => {
+  console.log("CREATE_CITY_DROPDOWN---->", getState());
+  let { cities, pgrKeys, currentLanguage } = getState();
   dispatch({
-    type: UPDATE_I18nStore_LOCALITY_PGR,
-    payload: { code, city, boundries, pgrKeys },
+    type: UPDATE_I18nStore_CITY_PGR,
+    payload: { cities: cities.citiKeys, pgrKeys: pgrKeys.pgrKeys, currentLanguage: currentLanguage.language },
   });
 };
 
-export const updateCityMapToi18n = () => (dispatch, getState) => {
-  let { cities, pgrKeys } = getState();
+export const updateLocalityMapToi18n = () => (dispatch, getState) => {
+  console.log("CREATE_CITY_DROPDOWN22222222222---->", getState());
+  let { currentLanguage, localities } = getState();
+  let { code, city, localityData: boundries } = localities.localityResponse;
+  let pgrKeys = localities.localityLocalizationKeysPGR;
+
   dispatch({
-    type: UPDATE_I18nStore_CITY_PGR,
-    payload: { cities: cities.citiKeys, pgrKeys: pgrKeys.pgrKeys },
+    type: UPDATE_I18nStore_LOCALITY_PGR,
+    payload: { code, city, boundries, pgrKeys, currentLanguage: currentLanguage.language },
   });
 };
