@@ -72,6 +72,7 @@ const CityMohalla = ({ children, ...props }) => {
           <LanguageSelect />
           <Select
             id="inputGroupSelect01"
+            label="City"
             onChange={handleCityChange}
             options={citysKeyVal.citiKeys.map((city) => ({
               value: city.city,
@@ -81,6 +82,7 @@ const CityMohalla = ({ children, ...props }) => {
           {localities.localityList && (
             <Select
               id="inputGroupSelect02"
+              label="Mohalla"
               options={localities.localityList.map((locality) => ({
                 value: locality.value,
                 text: t(locality.key),

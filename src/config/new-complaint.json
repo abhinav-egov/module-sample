@@ -98,17 +98,17 @@
         "title": "Section 2",
         "fields": [
           {
-            "id": "city-mohalla",
-            "name": "city-mohalla",
-            "component": "city-mohalla"
-          },
-          {
             "name": "description",
             "id": "description",
             "type": "text",
             "component": "input-field",
             "placeholder": "",
             "label": "Description"
+          },
+          {
+            "id": "city-mohalla",
+            "name": "city-mohalla",
+            "component": "city-mohalla"
           }
         ]
       },

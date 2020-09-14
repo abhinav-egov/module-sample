@@ -25,6 +25,7 @@ const LanguageSelect = () => {
       {supportedLangList && (
         <Select
           id="lang"
+          label="Select language"
           onChange={handleLangChange}
           options={supportedLangList.map((lng) => ({
             value: lng.key,
