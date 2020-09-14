@@ -8,11 +8,9 @@ import ComponentMap from "../ComponentMap";
 import { GetFunction } from "../FunctionRegistry";
 import { Renderer } from "../Renderer";
 
-const NewComplaintPage = ({ t }) => {
+const NewComplaintPage = () => {
   const state = useSelector((state) => state.formData);
-  const pageConfig = useSelector(
-    (state) => state.config[Pages.PGR_NEW_COMPLAINT]
-  );
+  const pageConfig = useSelector((state) => state.config[Pages.PGR_NEW_COMPLAINT]);
   const { handleSubmit, register } = useForm({ defaultValues: {} });
   const dispatch = useDispatch();
 
@@ -47,8 +45,8 @@ const NewComplaintPage = ({ t }) => {
   };
 
   const config = useMemo(() => {
-    return getConfig(ComponentMap, GetFunction, configParams, t);
-  }, [configParams, t]);
+    return getConfig(ComponentMap, GetFunction, configParams);
+  }, [configParams]);
 
   return (
     <div className="govuk-width-container">

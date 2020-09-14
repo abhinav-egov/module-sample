@@ -11,10 +11,11 @@ import {
 } from "../redux/actions";
 // import { useTranslation } from "react-i18next";
 import LanguageSelect from "../components/LanguageSelect";
+import { useTranslation } from "react-i18next";
 //import { runTimeTranslations } from "../i18n";
 
 const CityMohalla = ({ children, ...props }) => {
-  let { t } = props;
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   //const { t, i18n } = useTranslation();
   const state = useSelector((state) => state);
