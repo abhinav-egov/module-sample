@@ -3,9 +3,10 @@ import HttpApi from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
 let options = {
-  loadPath: "/locales/i18n/{{ns}}/{{lng}}.json",
+  loadPath: "/locales/i18n/{{ns}}/pgr/{{lng}}.json",
   // loadPath: "http://localhost:8081/locale/{{ns}}/{{lng}}.json",
   // addPath: "http://localhost:8081/locales/add/{{lng}}/{{ns}}",
+
   crossDomain: true,
   requestOptions: {
     mode: "cors",
@@ -21,8 +22,9 @@ let options = {
 
 let i18nextConfig = {
   lng: "en",
+  // resources,
   backend: options,
-  fallbackLng: false,
+  fallbackLng: "en",
   debug: false,
   ns: ["translations"],
   defaultNS: "translations",
@@ -43,7 +45,6 @@ let i18nextConfig = {
 
 export const runTimeTranslations = (runTimeData, lng) => {
   i18next.addResources(lng, i18nextConfig.ns[0], runTimeData);
-  // i18next.reloadResources(null, i18nextConfig.ns[0]);
 };
 
 i18next.use(initReactI18next).use(HttpApi).init(i18nextConfig);

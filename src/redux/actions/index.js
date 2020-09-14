@@ -116,6 +116,9 @@ export const getLocalityKeysPGR = () => async (dispatch, getState) => {
     data,
     "post"
   );
+  if (response.data.messages.length === 0 && lng !== "en") {
+    response = await request(`/localization/messages/v1/_search?module=rainmaker-pb.${tenant}&locale=${"en"}_IN&tenantId=pb.${tenant}`, data, "post");
+  }
   dispatch({
     type: FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
     payload: response.data.messages,
@@ -123,7 +126,6 @@ export const getLocalityKeysPGR = () => async (dispatch, getState) => {
 };
 
 export const updateCityMapToi18n = () => (dispatch, getState) => {
-  console.log("CREATE_CITY_DROPDOWN---->", getState());
   let { cities, pgrKeys, currentLanguage } = getState();
   dispatch({
     type: UPDATE_I18nStore_CITY_PGR,
@@ -132,7 +134,6 @@ export const updateCityMapToi18n = () => (dispatch, getState) => {
 };
 
 export const updateLocalityMapToi18n = () => (dispatch, getState) => {
-  console.log("CREATE_CITY_DROPDOWN22222222222---->", getState());
   let { currentLanguage, localities } = getState();
   let { code, city, localityData: boundries } = localities.localityResponse;
   let pgrKeys = localities.localityLocalizationKeysPGR;

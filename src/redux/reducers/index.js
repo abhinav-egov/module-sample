@@ -66,7 +66,6 @@ const cityReducer = (state = [], action) => {
 };
 
 const localityReducer = (state = [], action) => {
-  // console.log("action----------------------->", action);
   switch (action.type) {
     case FETCH_LOCALITIES:
       let tenantBoundry = action.payload.response;

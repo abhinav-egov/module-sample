@@ -70,6 +70,7 @@ const CityMohalla = ({ children, ...props }) => {
       {citysKeyVal.citiKeys && (
         <>
           <LanguageSelect />
+          {/* {t("welcomeMessage")} */}
           <Select
             id="inputGroupSelect01"
             label="City"
