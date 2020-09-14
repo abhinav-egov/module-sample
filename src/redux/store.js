@@ -8,8 +8,7 @@ const getStore = (defaultConfig, languageConfig) => {
   return createStore(
     getRootReducer(defaultConfig, languageConfig),
     // compose(applyMiddleware(...middleware), process.env.NODE_ENV !== "production" ? composeWithDevTools() : null)
-    compose(applyMiddleware(...middleware)),
-    process.env.NODE_ENV !== "production" ? composeWithDevTools() : null
+    process.env.NODE_ENV !== "production" ? composeWithDevTools(applyMiddleware(...middleware)) : compose(applyMiddleware(...middleware))
   );
 };
 export default getStore;
