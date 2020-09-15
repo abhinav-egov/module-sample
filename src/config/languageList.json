@@ -1,6 +1,12 @@
 {
   "supportedLangList": [
-    { "key": "en", "value": "English" },
-    { "key": "hi", "value": "Hindi" }
+    {
+      "key": "en",
+      "value": "English"
+    },
+    {
+      "key": "hi",
+      "value": "Hindi"
+    }
   ]
 }

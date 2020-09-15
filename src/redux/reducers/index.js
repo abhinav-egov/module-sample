@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import i18next from "i18next";
 import ConfigActionTypes from "../../@egovernments/digit-utils/enums/ConfigActionTypes";
 import {
   FETCH_CITIES,
@@ -16,7 +17,6 @@ import {
   GetLocalityLocalizationKeysFromPGR,
   GetLocalityDropDownList,
 } from "../utils/pgrUtils";
-import { runTimeTranslations } from "../../i18n";
 
 const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
   switch (action.type) {
@@ -55,7 +55,7 @@ const cityReducer = (state = [], action) => {
     case UPDATE_I18nStore_CITY_PGR:
       let { cities, currentLanguage, pgrKeys } = action.payload;
       let cityKeyMap = GetCityLocalizationMap(cities, pgrKeys);
-      runTimeTranslations(cityKeyMap, currentLanguage || "en");
+      i18next.addResources(currentLanguage || "en", "translations", cityKeyMap);
       return {
         ...state,
         cityKeyMap,
@@ -86,7 +86,7 @@ const localityReducer = (state = [], action) => {
     case UPDATE_I18nStore_LOCALITY_PGR:
       const { code: cityCode, boundries, pgrKeys, currentLanguage } = action.payload;
       let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(cityCode, boundries, pgrKeys);
-      runTimeTranslations(localityLocalizationKeys, currentLanguage || "en");
+      i18next.addResources(currentLanguage || "en", "translations", localityLocalizationKeys);
       const localityList = GetLocalityDropDownList(localityLocalizationKeys);
       return { ...state, localityList: [...localityList] };
     default:

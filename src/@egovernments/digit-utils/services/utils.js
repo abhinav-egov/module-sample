@@ -1,7 +1,12 @@
 import Axios from "axios";
 
-export const request = async (url, data, method = "GET", cache = false) => {
+export const Request = async ({ method = "POST", url, data = {}, cache = false }) => {
   let key = "";
+  if (method.toUpperCase() === "POST") {
+    data.RequestInfo = {
+      apiId: "Rainmaker",
+    };
+  }
   if (cache) {
     key = `${method.toUpperCase()}.${url}.${JSON.stringify(data, null, 0)}`;
     const value = window.sessionStorage.getItem(key);
