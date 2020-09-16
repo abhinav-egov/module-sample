@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 const mapPropsToConfig = (config) => {
   const configWithProps = [];
@@ -16,7 +16,8 @@ const mapPropsToConfig = (config) => {
   return configWithProps;
 };
 
-export const Renderer = React.forwardRef(({ config }) => {
+export const Renderer = React.forwardRef(({ config }, ref) => {
+  console.log("ref-->", ref);
   if (!config) {
     throw new Error("You are calling Renderer with no config.");
   }
@@ -28,15 +29,15 @@ export const Renderer = React.forwardRef(({ config }) => {
       if (fields && fields.length > 1) {
         return (
           <Fragment key={props.name || props.id}>
-            <Component {...props}>
-              <Renderer config={fields} />
+            <Component {...props} ref={ref}>
+              <Renderer config={fields} ref={ref} />
             </Component>
           </Fragment>
         );
       }
       return (
         <Fragment key={props.name || props.id}>
-          <Component {...props} />
+          <Component {...props} ref={ref} />
         </Fragment>
       );
     });

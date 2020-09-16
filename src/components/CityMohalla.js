@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
   const state = useSelector((state) => state);
   const citysKeyVal = useSelector((state) => state.cities);
   const pgrKeysVal = useSelector((state) => state.pgrKeys);
