@@ -34,3 +34,10 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
   padding: 10px 0;
   margin-bottom: 10px;
 }
+
+.column {
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+}

@@ -29,10 +29,7 @@ const InitSectionToUpdate = (forms) => {
   }
   if (forms.__property__ && forms.__action__) {
     selectedProperty = forms.__property__;
-    currentUpdatableSection =
-      currentUpdatableSection.length === 0
-        ? defaultConfigCopy
-        : currentUpdatableSection;
+    currentUpdatableSection = currentUpdatableSection.length === 0 ? defaultConfigCopy : currentUpdatableSection;
     findSectionById(selectedProperty, currentUpdatableSection);
     seachInDefaultConfig(forms.__property__, forms);
   } else if (Array.isArray(forms)) {
@@ -43,6 +40,7 @@ const InitSectionToUpdate = (forms) => {
     let array = configUtils.ifObjectContainsArray(forms).value;
     InitSectionToUpdate(array);
   } else {
+    console.log("forms--->", forms);
     throw new Error("__property__ or  __action__ not found");
   }
 };
@@ -53,11 +51,8 @@ const GetCurrentUpdatableSection = (id, defaultConfigCopy) => {
       if (defaultConfigCopy[i].id === id) {
         currentUpdatableSection.push(defaultConfigCopy[i]);
         //console.log("matched", currentUpdatableSection);
-      } else if (
-        configUtils.ifObjectContainsArray(defaultConfigCopy[i]).hasArray
-      ) {
-        let array = configUtils.ifObjectContainsArray(defaultConfigCopy[i])
-          .value;
+      } else if (configUtils.ifObjectContainsArray(defaultConfigCopy[i]).hasArray) {
+        let array = configUtils.ifObjectContainsArray(defaultConfigCopy[i]).value;
         GetCurrentUpdatableSection(id, array);
       }
     }
@@ -69,11 +64,8 @@ const findSectionById = (id, currentUpdatableSection) => {
     for (let i = 0; i < currentUpdatableSection.length; i++) {
       if (currentUpdatableSection[i].id === id) {
         sectionToBeUpdated = currentUpdatableSection;
-      } else if (
-        configUtils.ifObjectContainsArray(currentUpdatableSection[i]).hasArray
-      ) {
-        let arr = configUtils.ifObjectContainsArray(currentUpdatableSection[i])
-          .value;
+      } else if (configUtils.ifObjectContainsArray(currentUpdatableSection[i]).hasArray) {
+        let arr = configUtils.ifObjectContainsArray(currentUpdatableSection[i]).value;
         findSectionById(id, arr);
       }
     }
@@ -95,8 +87,7 @@ const seachInDefaultConfig = (id, action) => {
       }
     });
   } else if (configUtils.ifObjectContainsArray(sectionToBeUpdated).hasArray) {
-    sectionToBeUpdated = configUtils.ifObjectContainsArray(sectionToBeUpdated)
-      .value;
+    sectionToBeUpdated = configUtils.ifObjectContainsArray(sectionToBeUpdated).value;
     seachInDefaultConfig(id, action);
   }
 };
@@ -127,14 +118,12 @@ const handleInsertion = (index, action, fields) => {
 };
 
 const getIndex = (propertyValue, fields) => {
-
   let index = fields.findIndex((option) => option.id === propertyValue);
 
   return index;
 };
 
 const insertAt = (index, data, fields) => {
-
   if (!data.id) {
     throw new Error("id is required is required to insert a record");
   }

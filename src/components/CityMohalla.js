@@ -10,14 +10,13 @@ import {
   updateLocalityMapToi18n,
 } from "../redux/actions";
 // import { useTranslation } from "react-i18next";
-import LanguageSelect from "../components/LanguageSelect";
 import { useTranslation } from "react-i18next";
 //import { runTimeTranslations } from "../i18n";
 
-const CityMohalla = ({ children, ...props }) => {
+const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  //const { t, i18n } = useTranslation();
+
   const state = useSelector((state) => state);
   const citysKeyVal = useSelector((state) => state.cities);
   const pgrKeysVal = useSelector((state) => state.pgrKeys);
@@ -34,10 +33,6 @@ const CityMohalla = ({ children, ...props }) => {
   const localityKeysPGR = useCallback(() => dispatch(getLocalityKeysPGR()), [dispatch]);
 
   const localityMapToi18n = useCallback(() => dispatch(updateLocalityMapToi18n()), [dispatch]);
-
-  // useEffect(() => {
-  //   i18n.changeLanguage("en");
-  // }, [i18n]);
 
   useEffect(() => {
     getCities();
@@ -70,11 +65,13 @@ const CityMohalla = ({ children, ...props }) => {
     <Fragment>
       {citysKeyVal.citiKeys && (
         <>
-          <LanguageSelect />
+          {/* <LanguageSelect /> */}
           {/* {t("welcomeMessage")} */}
           <Select
             id="inputGroupSelect01"
             label="City"
+            ref={ref}
+            name="city-select"
             onChange={handleCityChange}
             options={citysKeyVal.citiKeys.map((city) => ({
               value: city.city,
@@ -85,6 +82,8 @@ const CityMohalla = ({ children, ...props }) => {
             <Select
               id="inputGroupSelect02"
               label="Mohalla"
+              ref={ref}
+              name="locality-select"
               options={localities.localityList.map((locality) => ({
                 value: locality.value,
                 text: t(locality.key),
@@ -95,6 +94,6 @@ const CityMohalla = ({ children, ...props }) => {
       )}
     </Fragment>
   );
-};
+});
 
 export default CityMohalla;

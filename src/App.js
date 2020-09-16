@@ -5,12 +5,16 @@ import "./index.scss";
 import ListPage from "./pages/List";
 import NewComplaintPage from "./pages/NewComplaint";
 import "./i18n";
+import LanguageSelect from "./components/LanguageSelect";
 
 const Header = () => (
-  <div>
-    <Link to="/">Home</Link> -&nbsp;
-    <Link to="/new">New</Link>
-  </div>
+  <>
+    <div className="column">
+      <Link to="/">Home</Link> -&nbsp;
+      <Link to="/new">New</Link>
+      <LanguageSelect />
+    </div>
+  </>
 );
 
 const App = () => {

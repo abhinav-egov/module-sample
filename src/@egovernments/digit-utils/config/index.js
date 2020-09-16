@@ -22,7 +22,7 @@ export const getConfig = (ComponentMap, GetFunction, { config, state, repeatClic
       onSubmit: component === "form" ? onSubmit : null,
       repeats: component === "form-section-repeat-group" ? state[name + "-repeats"] || 1 : null,
       dorepeat: component === "form-section-repeat-group" ? repeatClicked(name) : null,
-      ref: component === "input-select" || component === "input-field" ? register : null,
+      ref: component === "input-select" || component === "input-field" || "city-mohalla" ? register : null,
       // onChange: component === 'input-field' ? onChange(name) : null,
       component: ComponentMap[component],
     };

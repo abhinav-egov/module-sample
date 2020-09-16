@@ -16,5 +16,5 @@ export default {
   "form-section": FormSection,
   "form-section-repeat-group": FormSectionRepeatGroup,
   button: Button,
-  "city-mohalla": CityMohalla
+  "city-mohalla": CityMohalla,
 };

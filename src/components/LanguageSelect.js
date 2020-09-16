@@ -5,16 +5,10 @@ import { useTranslation } from "react-i18next";
 
 const LanguageSelect = () => {
   const { i18n } = useTranslation();
-  //   useEffect(() => {
-  //     i18n.changeLanguage("en");
-  //   }, []);
-
+  let languages = [];
   const state = useSelector((state) => state);
-
+  languages = state.languages;
   const dispatch = useDispatch();
-
-  //   console.log("lang state--->", state);
-  const { supportedLangList } = state.languages;
   const handleLangChange = (e) => {
     i18n.changeLanguage(e.target.value);
     dispatch({ type: "CHANGE_LANGUAGE", payload: e.target.value });
@@ -22,14 +16,13 @@ const LanguageSelect = () => {
 
   return (
     <>
-      {supportedLangList && (
+      {languages.length && (
         <Select
           id="lang"
-          label="Select language"
           onChange={handleLangChange}
-          options={supportedLangList.map((lng) => ({
-            value: lng.key,
-            text: lng.value,
+          options={languages.map((lng) => ({
+            value: lng.value,
+            text: lng.label,
           }))}
         ></Select>
       )}

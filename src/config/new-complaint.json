@@ -81,8 +81,8 @@
                 ]
               },
               {
-                "name": "description",
-                "id": "description",
+                "name": "description-ulb",
+                "id": "description-ulb",
                 "type": "text",
                 "component": "input-field",
                 "placeholder": "",
@@ -93,13 +93,15 @@
         ]
       },
       {
-        "id": "form-section-2",
-        "component": "form-section",
-        "title": "Section 2",
+        "id": "repeat-group-2",
+        "name": "ulb-section-2",
+        "component": "form-section-repeat-group",
+        "min": 1,
+        "max": 5,
         "fields": [
           {
-            "name": "description",
-            "id": "description",
+            "name": "description-ulb2",
+            "id": "description-ulb2",
             "type": "text",
             "component": "input-field",
             "placeholder": "",
@@ -112,6 +114,7 @@
           }
         ]
       },
+
       {
         "name": "submit",
         "id": "submit",

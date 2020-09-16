@@ -16,7 +16,7 @@ const mapPropsToConfig = (config) => {
   return configWithProps;
 };
 
-export const Renderer = ({ config }) => {
+export const Renderer = React.forwardRef(({ config }) => {
   if (!config) {
     throw new Error("You are calling Renderer with no config.");
   }
@@ -43,4 +43,4 @@ export const Renderer = ({ config }) => {
   };
 
   return renderComponents(configWithProps);
-};
+});
