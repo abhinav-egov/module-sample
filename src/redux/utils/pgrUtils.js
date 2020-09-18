@@ -18,20 +18,15 @@ export const GetCityLocalizationMap = (cityKeys, pgrKeys) => {
 
 const GetCityLocatizationKeys = (citykeys) => {
   let keys = [];
-  let city = "";
   citykeys.tenants.forEach((tenant) => {
-    let code = tenant.code.replace(".", "_").toUpperCase();
-    city = code.split("_")[1];
+    const code = tenant.code.replace(".", "_").toUpperCase();
+    const city = code.split("_")[1];
     keys.push({ city, key: "TENANT_TENANTS_" + code });
   });
   return keys;
 };
 
-export const GetLocalityLocalizationKeysFromPGR = (
-  code,
-  boundaries,
-  pgrKeys
-) => {
+export const GetLocalityLocalizationKeysFromPGR = (code, boundaries, pgrKeys) => {
   let key = "";
   return boundaries.reduce((obj, item) => {
     key = code + "_" + item.code;

@@ -59,7 +59,7 @@ const deltaConfig = {
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={null}>
-      <PGRApp deltaConfig={deltaConfig} />
+      <PGRApp deltaConfig={deltaConfig} stateCode="pb" moduleCode="PGR" />
     </Suspense>
   </React.StrictMode>,
   document.getElementById("root")

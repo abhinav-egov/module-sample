@@ -1,11 +1,45 @@
 import Urls from "./urls";
 import { Request } from "./utils";
+import { Storage } from "./Storage";
+
+const LOCALE_LIST = (locale) => `Locale.${locale}.List`;
+const LOCALE_MODULE = (locale, module) => `Locale.${locale}.${module}`;
+
+const LocalizationStore = {
+  getList: (locale) => Storage.get(LOCALE_LIST(locale)) || [],
+  store: (locale, modules, messages) => {
+    modules.forEach((module) => {
+      const Locales = LocalizationStore.getList(locale);
+      if (!Locales.includes(module)) {
+        Locales.push(module);
+        Storage.set(LOCALE_LIST(locale), Locales);
+        const moduleMessages = messages.filter((message) => message.module === module);
+        Storage.set(LOCALE_MODULE(locale, module), moduleMessages);
+      }
+    });
+  },
+  get: (locale, modules) => {
+    const storedModules = LocalizationStore.getList(locale);
+    const newModules = modules.filter((module) => !storedModules.includes(module));
+    const messages = [];
+    storedModules.forEach((module) => {
+      messages.push(...Storage.get(LOCALE_MODULE(locale, module)));
+    });
+    return [newModules, messages];
+  },
+};
 
 export const LocalizationService = {
-  getLocale: ({ module, locale = "en_IN", tenantId }) => {
+  getLocale: async ({ modules = [], locale = "en_IN", tenantId }) => {
     if (locale.indexOf("_IN") === -1) {
       locale += "_IN";
     }
-    return Request({ url: Urls.localization(module, locale, tenantId), cache: true });
+    const [newModules, messages] = LocalizationStore.get(locale, modules);
+    if (newModules.length > 0) {
+      const data = await Request({ url: Urls.localization(newModules.join(","), locale, tenantId), cache: false });
+      messages.push(...data.messages);
+    }
+    LocalizationStore.store(locale, modules, messages);
+    return messages;
   },
 };

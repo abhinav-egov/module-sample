@@ -29,23 +29,23 @@ export const fetchLocalities = (city) => async (dispatch) => {
 
 export const getLocalizationKeyPGR = () => async (dispatch, getState) => {
   const lng = getState().currentLanguage.language || "en";
-  const response = await LocalizationService.getLocale({ module: "rainmaker-common,rainmaker-pgr", locale: lng, tenantId: "pb" });
+  const messages = await LocalizationService.getLocale({ modules: ["rainmaker-common", "rainmaker-pgr"], locale: lng, tenantId: "pb" });
   dispatch({
     type: FETCH_LOCALIZATION_KEYS_PGR,
-    payload: response.messages,
+    payload: messages,
   });
 };
 
 export const getLocalityKeysPGR = () => async (dispatch, getState) => {
   const lng = getState().currentLanguage.language || "en";
   const tenant = getState().localities.localityResponse.city;
-  let response = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, locale: lng, tenantId: `pb.${tenant}` });
-  if (response.messages.length === 0 && lng !== "en") {
-    response = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, tenantId: `pb.${tenant}` });
+  let messages = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, locale: lng, tenantId: `pb.${tenant}` });
+  if (messages.length === 0 && lng !== "en") {
+    messages = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, tenantId: `pb.${tenant}` });
   }
   dispatch({
     type: FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
-    payload: response.messages,
+    payload: messages,
   });
 };
 

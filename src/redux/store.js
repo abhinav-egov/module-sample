@@ -4,10 +4,9 @@ import thunk from "redux-thunk";
 import getRootReducer from "./reducers";
 
 const middleware = [thunk];
-const getStore = (defaultConfig, languageConfig) => {
+const getStore = (defaultStore) => {
   return createStore(
-    getRootReducer(defaultConfig, languageConfig),
-    // compose(applyMiddleware(...middleware), process.env.NODE_ENV !== "production" ? composeWithDevTools() : null)
+    getRootReducer(defaultStore),
     process.env.NODE_ENV !== "production" ? composeWithDevTools(applyMiddleware(...middleware)) : compose(applyMiddleware(...middleware))
   );
 };

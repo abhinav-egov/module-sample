@@ -147,6 +147,16 @@ const deleteExtraKeys = (data) => {
   delete data.__property__;
 };
 
-// exports.MergeConfigObj = MergeConfigObj;
+const getMergedConfig = (defaultConfig, deltaConfig) => {
+  let mergedConfigObj = defaultConfig;
 
-export default MergeConfigObj;
+  for (const key in deltaConfig) {
+    if (deltaConfig.hasOwnProperty(key)) {
+      const mergedConfig = MergeConfigObj(defaultConfig[key], deltaConfig[key]);
+      mergedConfigObj[key] = mergedConfig;
+    }
+  }
+  return mergedConfigObj;
+};
+
+export default getMergedConfig;

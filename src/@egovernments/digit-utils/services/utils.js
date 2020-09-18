@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { Storage } from "./Storage";
 
 Axios.interceptors.request.use((req) => {
   console.log(`${req.method} ${req.url}`);
@@ -20,16 +21,26 @@ export const Request = async ({ method = "POST", url, data = {}, cache = false }
   }
   if (cache) {
     key = `${method.toUpperCase()}.${url}.${JSON.stringify(data, null, 0)}`;
-    const value = window.sessionStorage.getItem(key);
+    const value = Storage.get(key);
     if (value) {
-      return JSON.parse(value);
+      return value;
     }
   }
 
   const res = await Axios({ method, url, data });
   if (cache) {
-    window.sessionStorage.setItem(key, JSON.stringify(res.data));
+    Storage.set(key, res.data);
   }
 
   return res.data;
+};
+
+export const SortByName = (na, nb) => {
+  if (na < nb) {
+    return -1;
+  }
+  if (na > nb) {
+    return 1;
+  }
+  return 0;
 };

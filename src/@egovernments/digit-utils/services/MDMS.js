@@ -1,9 +1,9 @@
 import Urls from "./urls";
 import { Request } from "./utils";
 
-const initRequestBody = {
+const initRequestBody = (tenantId) => ({
   MdmsCriteria: {
-    tenantId: "pb",
+    tenantId,
     moduleDetails: [
       {
         moduleName: "common-masters",
@@ -15,8 +15,8 @@ const initRequestBody = {
       },
     ],
   },
-};
+});
 
 export const MdmsService = {
-  init: () => Request({ url: Urls.MDMS("pb"), data: initRequestBody, cache: true, method: "POST" }),
+  init: (stateCode = "pb") => Request({ url: Urls.MDMS(stateCode), data: initRequestBody(stateCode), cache: true, method: "POST" }),
 };

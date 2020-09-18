@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 const LanguageSelect = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
-  let { languages } = state.languages;
+  const languages = useSelector((state) => state.languages);
   const handleLangChange = (e) => {
     i18n.changeLanguage(e.target.value);
     dispatch({ type: "CHANGE_LANGUAGE", payload: e.target.value });
