@@ -39,9 +39,9 @@ export const getLocalizationKeyPGR = () => async (dispatch, getState) => {
 export const getLocalityKeysPGR = () => async (dispatch, getState) => {
   const lng = getState().currentLanguage.language || "en";
   const tenant = getState().localities.localityResponse.city;
-  let messages = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, locale: lng, tenantId: `pb.${tenant}` });
+  let messages = await LocalizationService.getLocale({ modules: [`rainmaker-pb.${tenant}`], locale: lng, tenantId: `pb.${tenant}` });
   if (messages.length === 0 && lng !== "en") {
-    messages = await LocalizationService.getLocale({ module: `rainmaker-pb.${tenant}`, tenantId: `pb.${tenant}` });
+    messages = await LocalizationService.getLocale({ modules: [`rainmaker-pb.${tenant}`], tenantId: `pb.${tenant}` });
   }
   dispatch({
     type: FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,

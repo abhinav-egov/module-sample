@@ -36,7 +36,7 @@ export const LocalizationService = {
     }
     const [newModules, messages] = LocalizationStore.get(locale, modules);
     if (newModules.length > 0) {
-      const data = await Request({ url: Urls.localization(newModules.join(","), locale, tenantId), cache: false });
+      const data = await Request({ url: Urls.localization, params: { module: newModules.join(","), locale, tenantId }, cache: false });
       messages.push(...data.messages);
     }
     LocalizationStore.store(locale, modules, messages);

@@ -3,6 +3,6 @@ import { Request } from "./utils";
 
 export const LocationService = {
   getLocalities: ({ tenantId }) => {
-    return Request({ url: Urls.location.localities(tenantId), cache: true });
+    return Request({ url: Urls.location.localities, params: { tenantId: tenantId.toLowerCase() }, cache: true });
   },
 };

@@ -12,7 +12,7 @@ Axios.interceptors.response.use((res) => {
   return res;
 });
 
-export const Request = async ({ method = "POST", url, data = {}, cache = false }) => {
+export const Request = async ({ method = "POST", url, data = {}, cache = false, params = {} }) => {
   let key = "";
   if (method.toUpperCase() === "POST") {
     data.RequestInfo = {
@@ -25,9 +25,11 @@ export const Request = async ({ method = "POST", url, data = {}, cache = false }
     if (value) {
       return value;
     }
+  } else {
+    params._ = Date.now();
   }
 
-  const res = await Axios({ method, url, data });
+  const res = await Axios({ method, url, data, params });
   if (cache) {
     Storage.set(key, res.data);
   }
