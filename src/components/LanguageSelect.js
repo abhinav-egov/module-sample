@@ -5,10 +5,9 @@ import { useTranslation } from "react-i18next";
 
 const LanguageSelect = () => {
   const { i18n } = useTranslation();
-  let languages = [];
-  const state = useSelector((state) => state);
-  languages = state.languages;
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
+  let { languages } = state.languages;
   const handleLangChange = (e) => {
     i18n.changeLanguage(e.target.value);
     dispatch({ type: "CHANGE_LANGUAGE", payload: e.target.value });
@@ -16,7 +15,7 @@ const LanguageSelect = () => {
 
   return (
     <>
-      {languages.length && (
+      {languages && (
         <Select
           id="lang"
           onChange={handleLangChange}

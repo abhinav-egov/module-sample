@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 //import { runTimeTranslations } from "../i18n";
 
 const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
+  // const { id_no } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -67,8 +68,8 @@ const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
           {/* <LanguageSelect /> */}
           {/* {t("welcomeMessage")} */}
           <Select
-            id="inputGroupSelect01"
             label="City"
+            id="inputGroupSelect01"
             ref={ref}
             name="city-select"
             onChange={handleCityChange}
@@ -79,8 +80,8 @@ const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
           ></Select>
           {localities.localityList && (
             <Select
-              id="inputGroupSelect02"
               label="Mohalla"
+              id="inputGroupSelect02"
               ref={ref}
               name="locality-select"
               options={localities.localityList.map((locality) => ({

@@ -27,8 +27,10 @@ const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
   }
 };
 
-const langReducer = (defaltLanguages) => (state = defaltLanguages, action) => {
+const languageReducer = (state = [], action) => {
   switch (action.type) {
+    case "FETCH_LANGUAGES":
+      return { ...state, languages: [...action.payload] };
     default:
       return state;
   }
@@ -103,7 +105,7 @@ const PGRKeysReducer = (state = [], action) => {
   }
 };
 
-const currentLanguage = (state = {}, action) => {
+const currentLanguageReducer = (state = {}, action) => {
   switch (action.type) {
     case CHANGE_LANGUAGE:
       return { ...state, language: action.payload };
@@ -112,15 +114,15 @@ const currentLanguage = (state = {}, action) => {
   }
 };
 
-const getRootReducer = (defaultConfig, languageConfig) =>
+const getRootReducer = (defaultConfig) =>
   combineReducers({
     config: configReducer(defaultConfig),
     formData: formDataReducer,
     cities: cityReducer,
     localities: localityReducer,
     pgrKeys: PGRKeysReducer,
-    currentLanguage,
-    languages: langReducer(languageConfig),
+    currentLanguage: currentLanguageReducer,
+    languages: languageReducer,
   });
 
 export default getRootReducer;

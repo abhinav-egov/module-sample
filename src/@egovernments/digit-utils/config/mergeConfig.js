@@ -10,7 +10,8 @@ const MergeConfigObj = (defaultConfig, deltaConfig) => {
   // console.log("defaultConfig--->", defaultConfig);
   // console.log("deltaConfig--->", deltaConfig);
   defaultConfigCopy = JSON.parse(JSON.stringify(defaultConfig));
-  processStateConfig(deltaConfig);
+  let deltaConfigCopy = JSON.parse(JSON.stringify(deltaConfig));
+  processStateConfig(deltaConfigCopy);
   return defaultConfigCopy;
 };
 
@@ -40,7 +41,7 @@ const InitSectionToUpdate = (forms) => {
     let array = configUtils.ifObjectContainsArray(forms).value;
     InitSectionToUpdate(array);
   } else {
-    console.log("forms--->", forms);
+    console.log("__property__ or  __action__ not found--->", forms);
     throw new Error("__property__ or  __action__ not found");
   }
 };

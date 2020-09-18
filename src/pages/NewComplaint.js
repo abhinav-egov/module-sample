@@ -20,6 +20,7 @@ const NewComplaintPage = () => {
   // };
 
   const handleRepeatClick = (field) => (event) => {
+    //console.log("field-->", field);
     event.preventDefault();
     dispatch({ type: "UPDATE_REPEAT", payload: { field } });
   };

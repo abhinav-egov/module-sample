@@ -5,6 +5,7 @@ import {
   UPDATE_I18nStore_LOCALITY_PGR,
   FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
   UPDATE_I18nStore_CITY_PGR,
+  FETCH_LANGUAGES,
 } from "./types";
 import { MdmsService } from "../../@egovernments/digit-utils/services/MDMS";
 import { LocalizationService } from "../../@egovernments/digit-utils/services/Localization";
@@ -64,5 +65,13 @@ export const updateLocalityMapToi18n = () => (dispatch, getState) => {
   dispatch({
     type: UPDATE_I18nStore_LOCALITY_PGR,
     payload: { code, city, boundries, pgrKeys, currentLanguage: currentLanguage.language },
+  });
+};
+
+export const fetchLanguages = () => async (dispatch, getState) => {
+  let response = await MdmsService.init();
+  dispatch({
+    type: FETCH_LANGUAGES,
+    payload: response.MdmsRes["common-masters"].StateInfo[0].languages,
   });
 };

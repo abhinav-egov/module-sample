@@ -7,6 +7,7 @@ const FormSectionRepeatGroup = ({ children, dorepeat, repeats, ...props }) => {
   for (let index = 0; index < repeats; index++) {
     formSections.push(
       <FormSection key={Math.random()} className="repeat-group" {...props}>
+        {/* {React.cloneElement(children, { id_no: index })} */}
         {children}
       </FormSection>
     );

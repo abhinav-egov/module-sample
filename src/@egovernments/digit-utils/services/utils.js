@@ -1,4 +1,5 @@
 import Axios from "axios";
+import "../../../index.scss";
 
 export const Request = async ({ method = "POST", url, data = {}, cache = false }) => {
   let key = "";
@@ -14,6 +15,17 @@ export const Request = async ({ method = "POST", url, data = {}, cache = false }
       return JSON.parse(value);
     }
   }
+
+  Axios.interceptors.request.use((req) => {
+    console.log(`${req.method} ${req.url}`);
+    document.body.classList.add("loader");
+    return req;
+  });
+
+  Axios.interceptors.response.use((res) => {
+    document.body.classList.remove("loader");
+    return res;
+  });
 
   const res = await Axios({ method, url, data });
   if (cache) {
