@@ -1,6 +1,8 @@
 $govuk-assets-path: "~govuk-frontend/govuk/assets/";
 @import "node_modules/govuk-frontend/govuk/all";
 
+$font-family: "GDS Transport", Arial, sans-serif;
+
 .egov-width-container {
   @extend .govuk-width-container;
   clear: both;
@@ -42,26 +44,28 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
   top: 0;
 }
 
-.loader:before {
-  content: "";
-  background: #000000cc;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-
-.loader:after {
-  content: "Loading...";
-  position: fixed;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  z-index: 1001;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.5rem;
+.loader {
+  font-family: $font-family;
+  &:before {
+    content: "";
+    background: #000000cc;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  &:after {
+    content: "Loading...";
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    z-index: 1001;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 }
