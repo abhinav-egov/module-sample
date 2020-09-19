@@ -1,22 +1,6 @@
 import { combineReducers } from "redux";
-import i18next from "i18next";
 import ConfigActionTypes from "../../@egovernments/digit-utils/enums/ConfigActionTypes";
-import {
-  FETCH_CITIES,
-  FETCH_LOCALITIES,
-  FETCH_LOCALIZATION_KEYS_PGR,
-  UPDATE_I18nStore_CITY_PGR,
-  FETCH_LOCALITY_LOCALIZATION_KEYS_PGR,
-  UPDATE_I18nStore_LOCALITY_PGR,
-  CHANGE_LANGUAGE,
-} from "../actions/types";
-import {
-  GetCityLocalizationKeysFromPGR,
-  TransformData,
-  GetCityLocalizationMap,
-  GetLocalityLocalizationKeysFromPGR,
-  GetLocalityDropDownList,
-} from "../utils/pgrUtils";
+import { FETCH_LOCALITIES, CHANGE_LANGUAGE } from "../actions/types";
 
 const configReducer = (defaultConfig) => (state = defaultConfig, action) => {
   switch (action.type) {
@@ -49,19 +33,8 @@ const formDataReducer = (state = {}, action) => {
   }
 };
 
-const cityReducer = (state = [], action) => {
+const cityReducer = (defaultCities) => (state = defaultCities, action) => {
   switch (action.type) {
-    case FETCH_CITIES:
-      let cityKeys = GetCityLocalizationKeysFromPGR(action.payload);
-      return { ...state, citiKeys: [...cityKeys] };
-    case UPDATE_I18nStore_CITY_PGR:
-      let { cities, currentLanguage, pgrKeys } = action.payload;
-      let cityKeyMap = GetCityLocalizationMap(cities, pgrKeys);
-      i18next.addResources(currentLanguage || "en", "translations", cityKeyMap);
-      return {
-        ...state,
-        cityKeyMap,
-      };
     default:
       return state;
   }
@@ -70,42 +43,25 @@ const cityReducer = (state = [], action) => {
 const localityReducer = (state = [], action) => {
   switch (action.type) {
     case FETCH_LOCALITIES:
-      let tenantBoundry = action.payload.response;
-      let code = tenantBoundry.tenantId.replace(".", "_").toUpperCase() + "_" + tenantBoundry.hierarchyType.code;
       return {
         ...state,
-        localityResponse: {
-          localityData: [...tenantBoundry.boundary],
-          city: action.payload.city.toLowerCase(),
-          code,
-        },
+        localityList: action.payload.localityList,
       };
-    case FETCH_LOCALITY_LOCALIZATION_KEYS_PGR:
-      return {
-        ...state,
-        localityLocalizationKeysPGR: TransformData(action.payload),
-      };
-    case UPDATE_I18nStore_LOCALITY_PGR:
-      const { code: cityCode, boundries, pgrKeys, currentLanguage } = action.payload;
-      let localityLocalizationKeys = GetLocalityLocalizationKeysFromPGR(cityCode, boundries, pgrKeys);
-      i18next.addResources(currentLanguage || "en", "translations", localityLocalizationKeys);
-      const localityList = GetLocalityDropDownList(localityLocalizationKeys);
-      return { ...state, localityList: [...localityList] };
     default:
       return state;
   }
 };
 
-const PGRKeysReducer = (state = [], action) => {
+const localeReducer = (defaultLocales) => (state = defaultLocales, action) => {
+  // console.log("defaultLocales-->", defaultLocales, action);
   switch (action.type) {
-    case FETCH_LOCALIZATION_KEYS_PGR:
-      return { ...state, pgrKeys: TransformData(action.payload) };
     default:
       return state;
   }
 };
 
 const currentLanguageReducer = (state = {}, action) => {
+  console.log("lang action", action);
   switch (action.type) {
     case CHANGE_LANGUAGE:
       return { ...state, language: action.payload };
@@ -114,15 +70,20 @@ const currentLanguageReducer = (state = {}, action) => {
   }
 };
 
+const stateInfoReducer = (defaultStateInfo) => (state = defaultStateInfo, action) => {
+  return state;
+};
+
 const getRootReducer = (defaultStore) =>
   combineReducers({
     config: configReducer(defaultStore.config),
     formData: formDataReducer,
-    cities: cityReducer,
+    locales: localeReducer(defaultStore.locales),
+    cities: cityReducer(defaultStore.cities),
     localities: localityReducer,
-    pgrKeys: PGRKeysReducer,
     currentLanguage: currentLanguageReducer,
     languages: languageReducer(defaultStore.languages),
+    stateInfo: stateInfoReducer(defaultStore.stateInfo),
   });
 
 export default getRootReducer;

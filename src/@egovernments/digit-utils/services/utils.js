@@ -2,7 +2,6 @@ import Axios from "axios";
 import { Storage } from "./Storage";
 
 Axios.interceptors.request.use((req) => {
-  console.log(`${req.method} ${req.url}`);
   document.body.classList.add("loader");
   return req;
 });
@@ -20,7 +19,7 @@ export const Request = async ({ method = "POST", url, data = {}, cache = false, 
     };
   }
   if (cache) {
-    key = `${method.toUpperCase()}.${url}.${JSON.stringify(data, null, 0)}`;
+    key = `${method.toUpperCase()}.${url}.${JSON.stringify(params, null, 0)}.${JSON.stringify(data, null, 0)}`;
     const value = Storage.get(key);
     if (value) {
       return value;
@@ -45,4 +44,13 @@ export const SortByName = (na, nb) => {
     return 1;
   }
   return 0;
+};
+
+export const TransformArrayToObj = (traslationList) => {
+  return traslationList.reduce(
+    // eslint-disable-next-line
+    (obj, item) => ((obj[item.code] = item.message), obj),
+    {}
+  );
+  // return trasformedTraslation;
 };

@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "../@egovernments/react-components/Select";
 import { useTranslation } from "react-i18next";
+import { updateLocalizationResources } from "../redux/actions";
 
 const LanguageSelect = () => {
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
+  const localizationResources = useCallback(() => dispatch(updateLocalizationResources()), [dispatch]);
   const languages = useSelector((state) => state.languages);
+
   const handleLangChange = (e) => {
-    i18n.changeLanguage(e.target.value);
-    dispatch({ type: "CHANGE_LANGUAGE", payload: e.target.value });
+    const lng = e.target.value;
+    i18n.changeLanguage(lng.split("_")[0]);
+    dispatch({ type: "CHANGE_LANGUAGE", payload: lng });
+    localizationResources();
   };
 
   return (

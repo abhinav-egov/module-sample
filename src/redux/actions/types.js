@@ -1,3 +1,4 @@
+//TODO: Make these immutable
 export const FETCH_CITIES = "FETCH_CITIES";
 export const FETCH_LOCALITIES = "FETCH_LOCALITIES";
 export const FETCH_LOCALIZATION_KEYS_PGR = "FETCH_LOCALIZATION_KEYS_PGR";

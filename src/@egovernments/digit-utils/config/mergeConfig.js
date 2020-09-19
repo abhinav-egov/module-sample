@@ -41,7 +41,6 @@ const InitSectionToUpdate = (forms) => {
     let array = configUtils.ifObjectContainsArray(forms).value;
     InitSectionToUpdate(array);
   } else {
-    console.log("__property__ or  __action__ not found--->", forms);
     throw new Error("__property__ or  __action__ not found");
   }
 };

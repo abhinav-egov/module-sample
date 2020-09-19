@@ -1,6 +1,7 @@
 import Urls from "./urls";
-import { Request } from "./utils";
+import { Request, TransformArrayToObj } from "./utils";
 import { Storage } from "./Storage";
+import i18next from "i18next";
 
 const LOCALE_LIST = (locale) => `Locale.${locale}.List`;
 const LOCALE_MODULE = (locale, module) => `Locale.${locale}.${module}`;
@@ -27,6 +28,11 @@ const LocalizationStore = {
     });
     return [newModules, messages];
   },
+
+  updateResources: (locale, messages) => {
+    let locales = TransformArrayToObj(messages);
+    i18next.addResources(locale.split("_")[0], "translations", locales);
+  },
 };
 
 export const LocalizationService = {
@@ -40,6 +46,7 @@ export const LocalizationService = {
       messages.push(...data.messages);
     }
     LocalizationStore.store(locale, modules, messages);
+    LocalizationStore.updateResources(locale, messages);
     return messages;
   },
 };
