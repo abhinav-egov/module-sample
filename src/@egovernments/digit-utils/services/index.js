@@ -4,12 +4,12 @@ import { SortByName } from "./utils";
 
 export const InitService = {
   defaultData: async (stateCode, moduleCode) => {
-    const data = await MdmsService.init(stateCode);
-    const stateInfo = data.MdmsRes["common-masters"].StateInfo[0];
-    const cityList = data.MdmsRes.tenant.citymodule.filter((module) => module.code === moduleCode)[0].tenants;
+    const { MdmsRes } = await MdmsService.init(stateCode);
+    const stateInfo = MdmsRes["common-masters"].StateInfo[0];
+    const cityList = MdmsRes.tenant.citymodule.filter((module) => module.code === moduleCode)[0].tenants;
     const citiesMap = cityList.map((city) => city.code);
-    const cities = data.MdmsRes.tenant.tenants
-      .filter((city) => citiesMap.filter((cityCode) => cityCode === city.code).length > 0)
+    const cities = MdmsRes.tenant.tenants
+      .filter((city) => citiesMap.includes(city.code))
       .map(({ code, name, logoId, emailId, address, contactNumber }) => ({
         code,
         name,

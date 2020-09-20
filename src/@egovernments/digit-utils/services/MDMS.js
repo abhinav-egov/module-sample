@@ -19,5 +19,5 @@ const initRequestBody = (tenantId) => ({
 
 export const MdmsService = {
   init: (stateCode = "pb") =>
-    Request({ url: Urls.MDMS, data: initRequestBody(stateCode), cache: true, method: "POST", params: { tenantId: stateCode } }),
+    Request({ url: Urls.MDMS, data: initRequestBody(stateCode), useCache: true, method: "POST", params: { tenantId: stateCode } }),
 };

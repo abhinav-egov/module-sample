@@ -11,14 +11,14 @@ Axios.interceptors.response.use((res) => {
   return res;
 });
 
-export const Request = async ({ method = "POST", url, data = {}, cache = false, params = {} }) => {
+export const Request = async ({ method = "POST", url, data = {}, useCache = false, params = {} }) => {
   let key = "";
   if (method.toUpperCase() === "POST") {
     data.RequestInfo = {
       apiId: "Rainmaker",
     };
   }
-  if (cache) {
+  if (useCache) {
     key = `${method.toUpperCase()}.${url}.${JSON.stringify(params, null, 0)}.${JSON.stringify(data, null, 0)}`;
     const value = Storage.get(key);
     if (value) {
@@ -29,7 +29,7 @@ export const Request = async ({ method = "POST", url, data = {}, cache = false, 
   }
 
   const res = await Axios({ method, url, data, params });
-  if (cache) {
+  if (useCache) {
     Storage.set(key, res.data);
   }
 
