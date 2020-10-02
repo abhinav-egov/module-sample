@@ -12,18 +12,24 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
     "egov-ui-components": "link:egov-ui-components",
     "govuk-frontend": "^3.8.1",
     "govuk-react-jsx": "^4.0.2",
+    "i18next": "^19.7.0",
+    "i18next-http-backend": "^1.0.18",
+    "i18next-react-postprocessor": "^3.0.4",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.7.0",
+    "react-i18next": "^11.7.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -48,7 +54,19 @@
     ]
   },
   "devDependencies": {
+    "http-proxy-middleware": "^1.0.5",
+    "husky": ">=4",
+    "lint-staged": ">=10",
     "microbundle-crl": "^0.13.11",
+    "prettier": "2.1.1",
     "redux-devtools-extension": "^2.13.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
   }
 }

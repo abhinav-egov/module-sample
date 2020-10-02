@@ -1,4 +1,5 @@
-[{
+[
+  {
     "id": "header",
     "component": "header",
     "text": "form example"
@@ -7,11 +8,13 @@
     "id": "form",
     "component": "form",
     "submit": "form-submit",
-    "fields": [{
+    "fields": [
+      {
         "id": "form-section-1",
         "component": "form-section",
         "title": "Section 1",
-        "fields": [{
+        "fields": [
+          {
             "name": "fullName",
             "id": "fullName",
             "type": "text",
@@ -57,25 +60,29 @@
             "component": "form-section-repeat-group",
             "min": 1,
             "max": 5,
-            "fields": [{
+            "fields": [
+              {
                 "name": "ulb",
                 "id": "ulb",
                 "component": "input-select",
                 "placeholder": "",
                 "label": "City",
-                "options": [{
+                "options": [
+                  {
+                    "id": "amritsar",
                     "text": "Amritsar",
                     "value": "amritsar"
                   },
                   {
+                    "id": "ludhiana",
                     "text": "Ludhiana",
                     "value": "ludhiana"
                   }
                 ]
               },
               {
-                "name": "description",
-                "id": "description",
+                "name": "description-ulb",
+                "id": "description-ulb",
                 "type": "text",
                 "component": "input-field",
                 "placeholder": "",
@@ -86,51 +93,28 @@
         ]
       },
       {
-        "id": "form-section-2",
-        "component": "form-section",
-        "title": "Section 2",
-        "fields": [{
-            "name": "fullName",
-            "id": "fullName",
-            "type": "text",
-            "component": "input-field",
-            "placeholder": "John Doe",
-            "label": "Full Name"
-          },
+        "id": "repeat-group-2",
+        "name": "ulb-section-2",
+        "component": "form-section-repeat-group",
+        "min": 1,
+        "max": 5,
+        "fields": [
           {
-            "name": "email",
-            "id": "email",
-            "type": "email",
-            "component": "input-field",
-            "placeholder": "john.doe@egovernments.com",
-            "label": "Email Address"
-          },
-          {
-            "name": "phoneNumber",
-            "id": "phoneNumber",
-            "type": "tel",
-            "component": "input-field",
-            "placeholder": "12345678",
-            "label": "Phone Number"
-          },
-          {
-            "name": "title",
-            "id": "title",
-            "type": "text",
-            "component": "input-field",
-            "placeholder": "",
-            "label": "Title"
-          },
-          {
-            "name": "description",
-            "id": "description",
+            "name": "description-ulb2",
+            "id": "description-ulb2",
             "type": "text",
             "component": "input-field",
             "placeholder": "",
             "label": "Description"
+          },
+          {
+            "id": "city-mohalla",
+            "name": "city-mohalla",
+            "component": "city-mohalla"
           }
         ]
       },
+
       {
         "name": "submit",
         "id": "submit",
