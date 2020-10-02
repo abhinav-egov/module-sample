@@ -6,7 +6,6 @@ import ListPage from "./pages/List";
 import NewComplaintPage from "./pages/NewComplaint";
 import "./i18n";
 import LanguageSelect from "./components/LanguageSelect";
-// import { fetchLanguages } from "../src/redux/actions/index";
 
 const Header = () => (
   <>
