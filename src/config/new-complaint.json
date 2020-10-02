@@ -81,8 +81,8 @@
                 ]
               },
               {
-                "name": "description",
-                "id": "description",
+                "name": "description-ulb",
+                "id": "description-ulb",
                 "type": "text",
                 "component": "input-field",
                 "placeholder": "",
@@ -93,28 +93,28 @@
         ]
       },
       {
-        "id": "form-section-2",
-        "component": "form-section",
-        "title": "Section 2",
+        "id": "repeat-group-2",
+        "name": "ulb-section-2",
+        "component": "form-section-repeat-group",
+        "min": 1,
+        "max": 5,
         "fields": [
           {
-            "name": "fullName",
-            "id": "fullName",
+            "name": "description-ulb2",
+            "id": "description-ulb2",
             "type": "text",
             "component": "input-field",
-            "placeholder": "John Doe",
-            "label": "Full Name"
+            "placeholder": "",
+            "label": "Description"
           },
           {
-            "name": "email",
-            "id": "email",
-            "type": "email",
-            "component": "input-field",
-            "placeholder": "john.doe@egovernments.com",
-            "label": "Email Address"
+            "id": "city-mohalla",
+            "name": "city-mohalla",
+            "component": "city-mohalla"
           }
         ]
       },
+
       {
         "name": "submit",
         "id": "submit",

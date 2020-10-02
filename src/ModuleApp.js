@@ -1,30 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 
 import getStore from "./redux/store";
-import newComplaintConfig from "./config/new-complaint.json";
 import App from "./App";
-import Pages from "./@egovernments/digit-utils/enums/Pages";
 import mergeConfig from "./@egovernments/digit-utils/config/mergeConfig";
+import defaultConfig from "./config";
+import { InitService } from "./@egovernments/digit-utils/services";
 
-const getMergedConfig = (defaultConfig, deltaConfig) => {
-  let mergedConfigObj = defaultConfig;
-  for (const key in deltaConfig) {
-    if (deltaConfig.hasOwnProperty(key)) {
-      const mergedConfig = mergeConfig(defaultConfig[key], deltaConfig[key]);
-      mergedConfigObj[key] = mergedConfig;
-    }
+const ModuleApp = ({ deltaConfig, stateCode, moduleCode }) => {
+  const [defaultStore, setDefaultStore] = useState({});
+
+  useEffect(() => {
+    const config = mergeConfig(defaultConfig, deltaConfig);
+    InitService.defaultData(stateCode, moduleCode).then((defaultData) => {
+      const store = { config, ...defaultData };
+      console.log("defaultStore", store);
+      setDefaultStore(store);
+    });
+  }, [deltaConfig, stateCode, moduleCode]);
+
+  if (Object.keys(defaultStore).length === 0) {
+    return <div>Loading</div>;
   }
-  return mergedConfigObj;
-};
-
-const ModuleApp = ({ deltaConfig }) => {
-  let defaultConfig = {
-    [Pages.PGR_LIST]: {},
-    [Pages.PGR_NEW_COMPLAINT]: newComplaintConfig,
-  };
   return (
-    <Provider store={getStore(getMergedConfig(defaultConfig, deltaConfig))}>
+    <Provider store={getStore(defaultStore)}>
       <App />
     </Provider>
   );

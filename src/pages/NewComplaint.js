@@ -10,9 +10,7 @@ import { Renderer } from "../Renderer";
 
 const NewComplaintPage = () => {
   const state = useSelector((state) => state.formData);
-  const pageConfig = useSelector(
-    (state) => state.config[Pages.PGR_NEW_COMPLAINT]
-  );
+  const pageConfig = useSelector((state) => state.config[Pages.PGR_NEW_COMPLAINT]);
   const { handleSubmit, register } = useForm({ defaultValues: {} });
   const dispatch = useDispatch();
 
@@ -41,6 +39,7 @@ const NewComplaintPage = () => {
     state,
     repeatClicked: handleRepeatClick,
     handlesubmit: handleSubmit,
+    // onChange: handleCityChange,
     register,
     onSubmit,
   };
