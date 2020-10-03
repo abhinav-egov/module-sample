@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 const InputField = React.forwardRef(({ label, i18nlabelkey, placeholder, i18nplaceholderkey, ...props }, ref) => {
   let { t } = useTranslation();
-  console.log("props-->", { ...props });
   return (
     <div className="egov-form-group govuk-grid-column-one-half">
       {i18nlabelkey || label ? (
