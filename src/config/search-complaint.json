@@ -37,8 +37,11 @@
             "placeholder": "",
             "label": "City",
             "mdmsdetails": {
-              "type": "city",
-              "details": [{ "moduleName": "tenant", "masterDetails": [{ "name": "citymodule" }, { "name": "tenants" }] }]
+              "type": "citymodule",
+              "details": {
+                "tenantId": "pb",
+                "moduleDetails": [{ "moduleName": "tenant", "masterDetails": [{ "name": "citymodule" }, { "name": "tenants" }] }]
+              }
             },
             "options": [
               {

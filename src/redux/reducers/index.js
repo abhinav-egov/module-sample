@@ -53,7 +53,6 @@ const localityReducer = (state = [], action) => {
 };
 
 const localeReducer = (defaultLocales) => (state = defaultLocales, action) => {
-  // console.log("defaultLocales-->", defaultLocales, action);
   switch (action.type) {
     default:
       return state;

@@ -1,5 +1,5 @@
 import Urls from "./urls";
-import { GetCitiesWithi18nKeys, Request } from "./utils";
+import { GetCitiesWithi18nKeys, GetEgovLocations, Request } from "./utils";
 
 const initRequestBody = (tenantId) => ({
   MdmsCriteria: {
@@ -17,7 +17,7 @@ const initRequestBody = (tenantId) => ({
   },
 });
 
-const getCriteria = (tenantId, moduleDetails) => {
+const getCriteria = ({ tenantId, moduleDetails }) => {
   return {
     MdmsCriteria: {
       tenantId,
@@ -26,10 +26,12 @@ const getCriteria = (tenantId, moduleDetails) => {
   };
 };
 
-const transformResponse = (type, MdmsRes, moduleCode) => {
+const transformResponse = (type, MdmsRes, moduleCode = "PGR") => {
   switch (type) {
-    case "city":
+    case "citymodule":
       return GetCitiesWithi18nKeys(MdmsRes, moduleCode);
+    case "egovLocation":
+      return GetEgovLocations(MdmsRes);
     default:
       break;
   }
@@ -38,11 +40,11 @@ const transformResponse = (type, MdmsRes, moduleCode) => {
 export const MdmsService = {
   init: (stateCode = "pb") =>
     Request({ url: Urls.MDMS, data: initRequestBody(stateCode), useCache: true, method: "POST", params: { tenantId: stateCode } }),
-  call: (stateCode, mdmsDetails) =>
-    Request({ url: Urls.MDMS, data: getCriteria(stateCode, mdmsDetails), useCache: true, method: "POST", params: { tenantId: stateCode } }),
-  getDataByCriteria: async (stateCode, mdmsDetails) => {
+  call: (details, stateCode = "pb") =>
+    Request({ url: Urls.MDMS, data: getCriteria(details), useCache: true, method: "POST", params: { tenantId: stateCode } }),
+  getDataByCriteria: async (mdmsDetails) => {
     const moduleCode = "PGR";
-    const { MdmsRes } = await MdmsService.call(stateCode, mdmsDetails.details);
+    const { MdmsRes } = await MdmsService.call(mdmsDetails.details);
     return transformResponse(mdmsDetails.type, MdmsRes, moduleCode);
   },
 };
