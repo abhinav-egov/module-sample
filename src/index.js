@@ -54,6 +54,33 @@ const deltaConfig = {
       ],
     },
   ],
+  "pgr-search-complaint": [
+    {
+      id: "form",
+      component: "form",
+      submit: "form-submit",
+      fields: [
+        {
+          id: "form-section-1",
+          component: "form-section",
+          title: "Section 1",
+          fields: [
+            {
+              name: "complaint-email-id",
+              id: "complaint-email-id",
+              type: "text",
+              component: "input-field",
+              i18nlabelkey: "ES_CREATECOMPLAINT_EMAIL_ID",
+              label: "ES_CREATECOMPLAINT_MOBILE_EMAIL_ID",
+              i18nplaceholderkey: "ES_CREATECOMPLAINT_EMAIL_ID_PLACEHOLDER",
+              __action__: "INSERT_AFTER",
+              __property__: "complaint-mobile-no",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 ReactDOM.render(

@@ -151,6 +151,7 @@ const getMergedConfig = (defaultConfig, deltaConfig) => {
 
   for (const key in deltaConfig) {
     if (deltaConfig.hasOwnProperty(key)) {
+      console.log("key:", key);
       const mergedConfig = MergeConfigObj(defaultConfig[key], deltaConfig[key]);
       mergedConfigObj[key] = mergedConfig;
     }

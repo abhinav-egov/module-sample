@@ -12,6 +12,7 @@ const ModuleApp = ({ deltaConfig, stateCode, moduleCode }) => {
 
   useEffect(() => {
     const config = mergeConfig(defaultConfig, deltaConfig);
+    console.log("config:", config);
     InitService.defaultData(stateCode, moduleCode).then((defaultData) => {
       const store = { config, ...defaultData };
       console.log("defaultStore", store);
