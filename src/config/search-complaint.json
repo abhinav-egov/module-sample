@@ -59,7 +59,7 @@
         "type": "submit",
         "component": "button",
         "placeholder": "",
-        "text": "Search"
+        "text": "ES_MYCOMPLAINTS_SEARCH_BUTTON"
       }
     ]
   }
