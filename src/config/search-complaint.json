@@ -21,15 +21,35 @@
             "component": "input-field",
             "i18nlabelkey": "ES_CREATECOMPLAINT_MOBILE_NUMBER",
             "label": "ES_CREATECOMPLAINT_MOBILE_NUMBER",
-            "i18nplaceholderkey": "ES_CREATECOMPLAINT_MOBILE_NUMBER_PLACEHOLDER"
+            "i18nplaceholderkey": "CORE_COMMON_MOBILE_NUMBER_PLACEHOLDER"
           },
           {
             "name": "complaint-no",
             "id": "complaint-no",
             "type": "text",
             "component": "input-field",
-            "i18nlabelkey": "ES_MYCOMPLAINTS_COMPLAINT_NO",
+            "i18nlabelkey": "CS_COMPLAINT_SUBMITTED_COMPLAINT_NO",
             "i18nplaceholderkey": "ES_MYCOMPLAINTS_COMPLAINT_NO_PLACEHOLDER"
+          },
+          {
+            "name": "ulb",
+            "id": "ulb",
+            "component": "input-select",
+            "placeholder": "",
+            "label": "City",
+            "mdmsSource": "citymodule",
+            "options": [
+              {
+                "id": "amritsar",
+                "text": "Amritsar",
+                "value": "amritsar"
+              },
+              {
+                "id": "ludhiana",
+                "text": "Ludhiana",
+                "value": "ludhiana"
+              }
+            ]
           }
         ]
       },

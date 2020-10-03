@@ -7,8 +7,6 @@ let currentUpdatableSection = [];
 let selectedProperty = "";
 
 const MergeConfigObj = (defaultConfig, deltaConfig) => {
-  // console.log("defaultConfig--->", defaultConfig);
-  // console.log("deltaConfig--->", deltaConfig);
   defaultConfigCopy = JSON.parse(JSON.stringify(defaultConfig));
   let deltaConfigCopy = JSON.parse(JSON.stringify(deltaConfig));
   processStateConfig(deltaConfigCopy);
@@ -151,7 +149,6 @@ const getMergedConfig = (defaultConfig, deltaConfig) => {
 
   for (const key in deltaConfig) {
     if (deltaConfig.hasOwnProperty(key)) {
-      console.log("key:", key);
       const mergedConfig = MergeConfigObj(defaultConfig[key], deltaConfig[key]);
       mergedConfigObj[key] = mergedConfig;
     }

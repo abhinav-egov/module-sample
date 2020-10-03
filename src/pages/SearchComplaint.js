@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getConfig } from "../@egovernments/digit-utils/config";
 import Pages from "../@egovernments/digit-utils/enums/Pages";
 import ComponentMap from "../ComponentMap";
@@ -12,7 +12,6 @@ const SearchComplaint = () => {
   const pageConfig = useSelector((state) => state.config[Pages.PGR_SEARCH]);
 
   const { handleSubmit, register } = useForm({ defaultValues: {} });
-  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     console.log("form", data);
