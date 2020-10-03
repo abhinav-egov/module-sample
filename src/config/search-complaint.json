@@ -19,17 +19,16 @@
             "id": "complaint-mobile-no",
             "type": "text",
             "component": "input-field",
-            "i18nlabelkey": "ES_CREATECOMPLAINT_MOBILE_NUMBER",
             "label": "ES_CREATECOMPLAINT_MOBILE_NUMBER",
-            "i18nplaceholderkey": "CORE_COMMON_MOBILE_NUMBER_PLACEHOLDER"
+            "placeholder": "CORE_COMMON_MOBILE_NUMBER_PLACEHOLDER"
           },
           {
             "name": "complaint-no",
             "id": "complaint-no",
             "type": "text",
             "component": "input-field",
-            "i18nlabelkey": "CS_COMPLAINT_SUBMITTED_COMPLAINT_NO",
-            "i18nplaceholderkey": "ES_MYCOMPLAINTS_COMPLAINT_NO_PLACEHOLDER"
+            "label": "CS_COMPLAINT_SUBMITTED_COMPLAINT_NO",
+            "placeholder": "ES_MYCOMPLAINTS_COMPLAINT_NO"
           },
           {
             "name": "ulb",
@@ -37,7 +36,10 @@
             "component": "input-select",
             "placeholder": "",
             "label": "City",
-            "mdmsSource": "citymodule",
+            "mdmsdetails": {
+              "type": "city",
+              "details": [{ "moduleName": "tenant", "masterDetails": [{ "name": "citymodule" }, { "name": "tenants" }] }]
+            },
             "options": [
               {
                 "id": "amritsar",

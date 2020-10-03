@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { InitService } from "../digit-utils/services/";
+import { MdmsService } from "../digit-utils/services/MDMS";
 
-const Select = React.forwardRef(({ label, options, id, mdmsSource = null, onChange, ...props }, ref) => {
+const Select = React.forwardRef(({ label, options, id, mdmsdetails = null, onChange, ...props }, ref) => {
   const [selectOptions, setSelectOptions] = useState(options);
   const { t } = useTranslation();
   const { code } = useSelector((state) => state).stateInfo;
   useEffect(() => {
-    if (mdmsSource) {
-      InitService.criteriaData(code, mdmsSource).then((list) => {
+    if (mdmsdetails) {
+      MdmsService.getDataByCriteria(code, mdmsdetails).then((list) => {
         let criteriaOptions = list.map((item) => ({
           value: item.name,
           text: item.i18nKey,
@@ -17,7 +17,7 @@ const Select = React.forwardRef(({ label, options, id, mdmsSource = null, onChan
         setSelectOptions([...criteriaOptions]);
       });
     }
-  }, [code, mdmsSource]);
+  }, [code, mdmsdetails]);
 
   return (
     <div className="govuk-form-group govuk-grid-column-one-half">

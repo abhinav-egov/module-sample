@@ -21,9 +21,4 @@ export const InitService = {
     });
     return defaultData;
   },
-  criteriaData: async (stateCode, mdmsSource) => {
-    const moduleCode = "PGR";
-    const { MdmsRes } = await MdmsService.call(stateCode, mdmsSource);
-    return GetCitiesWithi18nKeys(MdmsRes, moduleCode);
-  },
 };
