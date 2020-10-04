@@ -14,6 +14,7 @@ const ModuleApp = ({ deltaConfig, stateCode, cityCode, moduleCode }) => {
     const config = mergeConfig(defaultConfig, deltaConfig);
     InitService.defaultData(stateCode, cityCode, moduleCode).then((defaultData) => {
       const store = { config, ...defaultData };
+      console.log("store:", store);
       setDefaultStore(store);
     });
   }, [deltaConfig, stateCode, cityCode, moduleCode]);
