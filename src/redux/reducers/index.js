@@ -69,6 +69,10 @@ const currentLanguageReducer = (state = {}, action) => {
   }
 };
 
+const cityCodeReducer = (defaultCityCode) => (state = defaultCityCode, action) => {
+  return state;
+};
+
 const stateInfoReducer = (defaultStateInfo) => (state = defaultStateInfo, action) => {
   return state;
 };
@@ -82,6 +86,7 @@ const getRootReducer = (defaultStore) =>
     localities: localityReducer,
     currentLanguage: currentLanguageReducer,
     languages: languageReducer(defaultStore.languages),
+    cityCode: cityCodeReducer(defaultStore.cityCode),
     stateInfo: stateInfoReducer(defaultStore.stateInfo),
   });
 

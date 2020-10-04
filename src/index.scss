@@ -69,3 +69,34 @@ $font-family: "GDS Transport", Arial, sans-serif;
     font-size: 1.5rem;
   }
 }
+
+table.result {
+  &, & th, & td {
+    border: 1px solid black;
+  border-collapse: collapse;
+  }
+  & th, & td {
+    padding: 1rem 2rem;
+  }
+}
+
+.badge {
+  padding: 5px 25px;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .58px;
+    line-height: 17px;
+  &.green {
+    background-color: rgb(76, 175, 80);;
+  } 
+
+  &.orange {
+    background-color: rgb(238, 167, 58);
+  }
+
+  &.red {
+    background-color: rgb(244, 67, 54);;
+  }
+}

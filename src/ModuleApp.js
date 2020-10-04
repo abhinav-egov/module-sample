@@ -7,16 +7,16 @@ import mergeConfig from "./@egovernments/digit-utils/config/mergeConfig";
 import defaultConfig from "./config";
 import { InitService } from "./@egovernments/digit-utils/services";
 
-const ModuleApp = ({ deltaConfig, stateCode, moduleCode }) => {
+const ModuleApp = ({ deltaConfig, stateCode, cityCode, moduleCode }) => {
   const [defaultStore, setDefaultStore] = useState({});
 
   useEffect(() => {
     const config = mergeConfig(defaultConfig, deltaConfig);
-    InitService.defaultData(stateCode, moduleCode).then((defaultData) => {
+    InitService.defaultData(stateCode, cityCode, moduleCode).then((defaultData) => {
       const store = { config, ...defaultData };
       setDefaultStore(store);
     });
-  }, [deltaConfig, stateCode, moduleCode]);
+  }, [deltaConfig, stateCode, cityCode, moduleCode]);
 
   if (Object.keys(defaultStore).length === 0) {
     return <div>Loading</div>;
