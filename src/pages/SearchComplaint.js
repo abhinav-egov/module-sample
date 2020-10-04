@@ -23,8 +23,8 @@ const SearchComplaint = () => {
     setshow(!show);
   };
 
-  const popHandler = () => {
-    console.log("hi");
+  const popHandler = (prop) => {
+    alert(`property id: ${prop.id}`);
   };
 
   const configParams = {
