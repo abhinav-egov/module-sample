@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const Button = ({ text, ...props }) => {
-  console.log("text:", text);
   const { t } = useTranslation();
   return (
     <div className="govuk-grid-column-full" style={{ float: "left", width: "auto" }}>
