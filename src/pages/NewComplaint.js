@@ -30,15 +30,8 @@ const NewComplaintPage = () => {
   // }
   // RegisterFunction('form-submit', handleSubmit);
 
-  const beforeSubmit = pageConfig[1]["before-submit"];
-  console.log(beforeSubmit);
-
   const onSubmit = async (data) => {
-    let newData = {};
-    if (beforeSubmit && window[beforeSubmit]) {
-      newData = await window[beforeSubmit](JSON.parse(JSON.stringify(data)));
-    }
-    console.log("form", data, newData);
+    console.log("onSubmit", data);
   };
 
   const configParams = {
