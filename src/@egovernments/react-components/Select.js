@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MdmsService } from "../digit-utils/services/MDMS";
 
-const Select = React.forwardRef(({ label, options, id, mdmsdetails = null, onChange, ...props }, ref) => {
+const Select = React.forwardRef(({ label, options, id, mdmsdetails = null, onChange, register, ...props }, ref) => {
   const [selectOptions, setSelectOptions] = useState(options);
   const { t } = useTranslation();
   //const { code } = useSelector((state) => state).stateInfo;
@@ -23,7 +23,7 @@ const Select = React.forwardRef(({ label, options, id, mdmsdetails = null, onCha
       <label className="govuk-label" htmlFor={id}>
         {label}
       </label>
-      <select className="govuk-select" id={id} ref={ref} {...props} onChange={onChange}>
+      <select className="govuk-select" id={id} ref={register} {...props} onChange={onChange}>
         {selectOptions &&
           selectOptions.map((item, index) => (
             <option key={`${id}-option-${index}`} value={item.value}>

@@ -30,8 +30,15 @@ const NewComplaintPage = () => {
   // }
   // RegisterFunction('form-submit', handleSubmit);
 
+  const beforeSubmit = pageConfig[1]["before-submit"];
+  console.log(beforeSubmit);
+
   const onSubmit = (data) => {
-    console.log("form", data);
+    let newData = {};
+    if (beforeSubmit && window[beforeSubmit]) {
+      newData = window[beforeSubmit](JSON.parse(JSON.stringify(data)));
+    }
+    console.log("form", data, newData);
   };
 
   const configParams = {
