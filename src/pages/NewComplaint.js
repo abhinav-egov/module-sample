@@ -33,10 +33,10 @@ const NewComplaintPage = () => {
   const beforeSubmit = pageConfig[1]["before-submit"];
   console.log(beforeSubmit);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     let newData = {};
     if (beforeSubmit && window[beforeSubmit]) {
-      newData = window[beforeSubmit](JSON.parse(JSON.stringify(data)));
+      newData = await window[beforeSubmit](JSON.parse(JSON.stringify(data)));
     }
     console.log("form", data, newData);
   };
