@@ -30,8 +30,8 @@ const NewComplaintPage = () => {
   // }
   // RegisterFunction('form-submit', handleSubmit);
 
-  const onSubmit = (data) => {
-    console.log("form", data);
+  const onSubmit = async (data) => {
+    console.log("onSubmit", data);
   };
 
   const configParams = {

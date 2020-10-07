@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const InputField = React.forwardRef(({ label, placeholder, ...props }, ref) => {
+const InputField = React.forwardRef(({ label, placeholder, register, ...props }, ref) => {
   let { t } = useTranslation();
   return (
     <div className="egov-form-group govuk-grid-column-one-half">
@@ -10,7 +10,7 @@ const InputField = React.forwardRef(({ label, placeholder, ...props }, ref) => {
           {t(label)}
         </label>
       ) : null}
-      <input className="egov-input" ref={ref} placeholder={t(placeholder)} {...props} />
+      <input className="egov-input" ref={register} placeholder={t(placeholder)} {...props} />
     </div>
   );
 });

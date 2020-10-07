@@ -78,7 +78,6 @@ export const GetCitiesWithi18nKeys = (MdmsRes, moduleCode) => {
 };
 
 export const GetEgovLocations = (MdmsRes) => {
-  console.log("MdmsRes:", MdmsRes["egov-location"]);
   return MdmsRes["egov-location"].TenantBoundary[0].boundary.children.map((obj) => ({
     name: obj.localname,
     i18nKey: obj.localname,
