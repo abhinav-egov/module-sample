@@ -6,12 +6,6 @@ const defaultConfig = {
   [Pages.PGR_LIST]: {
     resultTable: [
       {
-        key: "acknowldgementNumber",
-        title: "Acknowldgement Number",
-        style: "link",
-        link: true,
-      },
-      {
         key: "address.locality.code",
         title: "Address",
         translate: true,
