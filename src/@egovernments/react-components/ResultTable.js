@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import sort from "./lib/sort";
 import safeEval from "safe-eval";
 
 const getValue = (object, attrArray) => {
@@ -31,6 +32,25 @@ const workflowStatusMap = {
 const ResultTable = ({ data, config, last }) => {
   const city = useSelector((state) => state.cityCode);
   const { t } = useTranslation();
+  const [resultData, setResultData] = useState({ data, updated: Date.now() });
+
+  const sortBy = (key, by) => {
+    setResultData({ data: sort(resultData.data, key, by), updated: Date.now() });
+  };
+
+  const sortHandler = (obj) => {
+    sortBy(obj.key, obj.sort.sortBy);
+    switch (obj.sort.sortBy) {
+      case "asc":
+        obj.sort.sortBy = "desc";
+        break;
+      case "desc":
+        obj.sort.sortBy = "asc";
+        break;
+      default:
+        console.warn("sortBy attribute should only have asc or desc as default values");
+    }
+  };
 
   const formatVal = (property, att) => {
     let value = getValue(property, att.key.split("."));
@@ -45,11 +65,7 @@ const ResultTable = ({ data, config, last }) => {
       value = t(`${att.i18nPrefix ? att.i18nPrefix.replace("{cityCode}", cityCode) : ""}${value}`.toUpperCase());
     }
 
-    return (
-      <span className={getStyle(att.style, value)}>
-        {att.link ? <Link to={`/applicationNumber=${property.propertyId}&tenantId=${property.tenantId}`}>{value}</Link> : value}
-      </span>
-    );
+    return <span className={getStyle(att.style, value)}>{value}</span>;
   };
 
   return (
@@ -57,9 +73,15 @@ const ResultTable = ({ data, config, last }) => {
       <table className="result">
         <thead>
           <tr>
+            <th>Acknowledgment Number</th>
             {config.map((column, index) => {
               return (
-                <th key={column.key} onClick={() => {}}>
+                <th
+                  key={column.key}
+                  onClick={() => {
+                    sortHandler(column);
+                  }}
+                >
                   {column.title} {column.sort && column.sort.enabled && column.sort.sortBy ? (column.sort.sortBy === "asc" ? "↓" : "↑") : ""}
                 </th>
               );
@@ -68,9 +90,12 @@ const ResultTable = ({ data, config, last }) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => {
+          {resultData.data.map((item, index) => {
             return (
               <tr key={index}>
+                <td>
+                  <Link to={`/applicationNumber=${item.propertyId}&tenantId=${item.tenantId}`}>{item.acknowldgementNumber}</Link>
+                </td>
                 {config.map((att, index2) => {
                   return <td key={index2}>{formatVal(item, att)}</td>;
                 })}
