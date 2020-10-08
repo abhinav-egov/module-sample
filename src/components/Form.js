@@ -8,7 +8,7 @@ const Form = ({ onSubmit, handlesubmit, children, ...props }) => {
       newData = await window[beforeSubmit](JSON.parse(JSON.stringify(data)));
     }
     console.log("form submit", data, newData);
-    onSubmit(data);
+    onSubmit(newData);
   };
   return (
     <form onSubmit={handlesubmit(submitForm)} {...props}>
