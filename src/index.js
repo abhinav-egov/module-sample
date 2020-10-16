@@ -54,12 +54,51 @@ const deltaConfig = {
       ],
     },
   ],
+  "pgr-search-complaint": [
+    {
+      id: "form",
+      component: "form",
+      submit: "form-submit",
+      fields: [
+        {
+          id: "form-section-1",
+          component: "form-section",
+          title: "Section 1",
+          fields: [
+            {
+              name: "clear",
+              id: "clear",
+              type: "submit",
+              component: "button",
+              placeholder: "",
+              text: "ES_MYCOMPLAINTS_CLEAR_SEARCH_BUTTON",
+              __action__: "INSERT_AFTER",
+              __property__: "submit",
+            },
+            {
+              name: "location",
+              id: "localtion",
+              component: "input-select",
+              placeholder: "",
+              label: "location",
+              mdmsdetails: {
+                type: "egovLocation",
+                details: { tenantId: "default", moduleDetails: [{ moduleName: "egov-location", masterDetails: [{ name: "TenantBoundary" }] }] },
+              },
+              __action__: "INSERT_AFTER",
+              __property__: "ulb",
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 ReactDOM.render(
   <React.StrictMode>
     <Suspense fallback={null}>
-      <PGRApp deltaConfig={deltaConfig} stateCode="pb" moduleCode="PGR" />
+      <PGRApp deltaConfig={deltaConfig} stateCode="pb" cityCode="pb.amritsar" moduleCode="PGR" />
     </Suspense>
   </React.StrictMode>,
   document.getElementById("root")

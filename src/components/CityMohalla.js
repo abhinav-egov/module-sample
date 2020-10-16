@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLocalities } from "../redux/actions";
 import { useTranslation } from "react-i18next";
 
-const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
+const CityMohalla = React.forwardRef(({ children, register, ...props }, ref) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -22,7 +22,7 @@ const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
           <Select
             label="City"
             id="inputGroupSelect01"
-            ref={ref}
+            ref={register}
             name="city-select"
             onChange={handleCityChange}
             options={state.cities.map((city) => ({
@@ -34,7 +34,7 @@ const CityMohalla = React.forwardRef(({ children, ...props }, ref) => {
             <Select
               label="Mohalla"
               id="inputGroupSelect02"
-              ref={ref}
+              ref={register}
               name="locality-select"
               options={localities.localityList.map((locality) => ({
                 value: locality.name,

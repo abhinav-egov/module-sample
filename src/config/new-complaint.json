@@ -8,6 +8,7 @@
     "id": "form",
     "component": "form",
     "submit": "form-submit",
+    "before-submit": "newApplicationSubmitInterceptor",
     "fields": [
       {
         "id": "form-section-1",
