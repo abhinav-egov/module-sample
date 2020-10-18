@@ -6,7 +6,6 @@ import ListPage from "./pages/List";
 import NewComplaintPage from "./pages/NewComplaint";
 import SearchComplaintPage from "./pages/SearchComplaint";
 
-import "./i18n";
 import LanguageSelect from "./components/LanguageSelect";
 
 const Header = () => (

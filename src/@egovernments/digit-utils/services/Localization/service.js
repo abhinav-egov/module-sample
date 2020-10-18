@@ -1,10 +1,19 @@
-import Urls from "./urls";
-import { Request, TransformArrayToObj } from "./utils";
-import { Storage } from "./Storage";
+import Urls from "../urls";
+import { Storage } from "../Utils/Storage";
 import i18next from "i18next";
+import { Request } from "../Utils/Request";
 
 const LOCALE_LIST = (locale) => `Locale.${locale}.List`;
 const LOCALE_MODULE = (locale, module) => `Locale.${locale}.${module}`;
+
+const TransformArrayToObj = (traslationList) => {
+  return traslationList.reduce(
+    // eslint-disable-next-line
+    (obj, item) => ((obj[item.code] = item.message), obj),
+    {}
+  );
+  // return trasformedTraslation;
+};
 
 const LocalizationStore = {
   getList: (locale) => Storage.get(LOCALE_LIST(locale)) || [],

@@ -2,7 +2,7 @@ import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import ReactPostprocessor from "i18next-react-postprocessor";
 
-let i18nextConfig = {
+const i18nextConfig = {
   lng: "en",
   fallbackLng: "en",
   debug: false,
@@ -31,6 +31,6 @@ let i18nextConfig = {
   },
 };
 
-i18next.use(new ReactPostprocessor()).use(initReactI18next).init(i18nextConfig);
-
-export default i18next;
+export const initI18n = () => {
+  i18next.use(new ReactPostprocessor()).use(initReactI18next).init(i18nextConfig);
+};

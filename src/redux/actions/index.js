@@ -1,5 +1,5 @@
 import { FETCH_LOCALITIES } from "./types";
-import { LocalizationService } from "../../@egovernments/digit-utils/services/Localization";
+import { LocalizationService } from "../../@egovernments/digit-utils/services/Localization/service";
 import { LocationService } from "../../@egovernments/digit-utils/services/Location";
 import { LocalityService } from "../../@egovernments/digit-utils/services/Localities";
 

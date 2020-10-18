@@ -1,5 +1,5 @@
 import Urls from "./urls";
-import { Request } from "./utils";
+import { Request } from "./Utils/Request";
 
 export const LocationService = {
   getLocalities: ({ tenantId }) => {

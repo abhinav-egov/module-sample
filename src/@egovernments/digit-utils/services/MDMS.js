@@ -1,5 +1,6 @@
 import Urls from "./urls";
-import { GetCitiesWithi18nKeys, GetEgovLocations, Request } from "./utils";
+import { GetCitiesWithi18nKeys } from "./utils";
+import { Request } from "./Utils/Request";
 
 const initRequestBody = (tenantId) => ({
   MdmsCriteria: {
@@ -24,6 +25,13 @@ const getCriteria = ({ tenantId, moduleDetails }) => {
       moduleDetails,
     },
   };
+};
+
+const GetEgovLocations = (MdmsRes) => {
+  return MdmsRes["egov-location"].TenantBoundary[0].boundary.children.map((obj) => ({
+    name: obj.localname,
+    i18nKey: obj.localname,
+  }));
 };
 
 const transformResponse = (type, MdmsRes, moduleCode = "PGR") => {
