@@ -1,7 +1,8 @@
-import React, { Suspense } from "react";
-import ReactDOM from "react-dom";
+import { React, ReactDOM } from "https://unpkg.com/es-react";
+// import React, { Suspense } from "react";
+// import ReactDOM from "react-dom";
 // import './index.scss';
-import PGRApp from "./ModuleApp";
+// import PGRApp from "./ModuleApp";
 const deltaConfig = {
   "pgr-new-complaint": [
     {
@@ -95,11 +96,16 @@ const deltaConfig = {
   ],
 };
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Suspense fallback={null}>
-      <PGRApp deltaConfig={deltaConfig} stateCode="pb" cityCode="pb.amritsar" moduleCode="PGR" />
-    </Suspense>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+window.onload = () => {
+  // const React = window.React;
+  // const ReactDOM = window.ReactDOM;
+  const PGRApp = window.eGov.PGRApp;
+  ReactDOM.render(
+    <React.StrictMode>
+      <React.Suspense fallback={null}>
+        <PGRApp deltaConfig={deltaConfig} stateCode="pb" cityCode="pb.amritsar" moduleCode="PGR" />
+      </React.Suspense>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+};

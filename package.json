@@ -37,7 +37,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:pkg": "microbundle-crl --no-compress --format modern,cjs"
+    "build:pkg": "microbundle-crl --no-compress --format iife"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -21,4 +21,7 @@ const ModuleApp = ({ deltaConfig, stateCode, cityCode, moduleCode }) => {
   );
 };
 
+window.eGov = window.eGov || {};
+window.eGov.PGRApp = ModuleApp;
+
 export default ModuleApp;

@@ -7,7 +7,7 @@ const middleware = [thunk];
 const getStore = (defaultStore) => {
   return createStore(
     getRootReducer(defaultStore),
-    process.env.NODE_ENV !== "production" ? composeWithDevTools(applyMiddleware(...middleware)) : compose(applyMiddleware(...middleware))
+    composeWithDevTools(applyMiddleware(...middleware)) // : compose(applyMiddleware(...middleware))
   );
 };
 export default getStore;

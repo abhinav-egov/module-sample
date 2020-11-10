@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import sort from "./lib/sort";
-import safeEval from "safe-eval";
+// import safeEval from "safe-eval";
 
 const getValue = (object, attrArray) => {
   const key = attrArray[0];
@@ -55,7 +55,7 @@ const ResultTable = ({ data, config, last }) => {
   const formatVal = (property, att) => {
     let value = getValue(property, att.key.split("."));
     if (att.modify) {
-      value = safeEval(att.modify, { value });
+      // value = safeEval(att.modify, { value });
     }
     if (att.type && att.type === "workflow-status") {
       value = workflowStatusMap[value] || "NA";

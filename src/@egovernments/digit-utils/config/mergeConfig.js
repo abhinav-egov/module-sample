@@ -1,5 +1,5 @@
 // let defaultConfig = require("./default2.json");
-let configUtils = require("./configUtils");
+import { ifObjectContainsArray } from "./configUtils";
 
 let defaultConfigCopy = {};
 let sectionToBeUpdated = {};
@@ -35,8 +35,8 @@ const InitSectionToUpdate = (forms) => {
     forms.forEach((form) => {
       InitSectionToUpdate(form);
     });
-  } else if (configUtils.ifObjectContainsArray(forms).hasArray) {
-    let array = configUtils.ifObjectContainsArray(forms).value;
+  } else if (ifObjectContainsArray(forms).hasArray) {
+    let array = ifObjectContainsArray(forms).value;
     InitSectionToUpdate(array);
   } else {
     throw new Error("__property__ or  __action__ not found");
@@ -49,8 +49,8 @@ const GetCurrentUpdatableSection = (id, defaultConfigCopy) => {
       if (defaultConfigCopy[i].id === id) {
         currentUpdatableSection.push(defaultConfigCopy[i]);
         //console.log("matched", currentUpdatableSection);
-      } else if (configUtils.ifObjectContainsArray(defaultConfigCopy[i]).hasArray) {
-        let array = configUtils.ifObjectContainsArray(defaultConfigCopy[i]).value;
+      } else if (ifObjectContainsArray(defaultConfigCopy[i]).hasArray) {
+        let array = ifObjectContainsArray(defaultConfigCopy[i]).value;
         GetCurrentUpdatableSection(id, array);
       }
     }
@@ -62,8 +62,8 @@ const findSectionById = (id, currentUpdatableSection) => {
     for (let i = 0; i < currentUpdatableSection.length; i++) {
       if (currentUpdatableSection[i].id === id) {
         sectionToBeUpdated = currentUpdatableSection;
-      } else if (configUtils.ifObjectContainsArray(currentUpdatableSection[i]).hasArray) {
-        let arr = configUtils.ifObjectContainsArray(currentUpdatableSection[i]).value;
+      } else if (ifObjectContainsArray(currentUpdatableSection[i]).hasArray) {
+        let arr = ifObjectContainsArray(currentUpdatableSection[i]).value;
         findSectionById(id, arr);
       }
     }
@@ -84,8 +84,8 @@ const seachInDefaultConfig = (id, action) => {
         actionHandler(action, id, sectionToBeUpdated);
       }
     });
-  } else if (configUtils.ifObjectContainsArray(sectionToBeUpdated).hasArray) {
-    sectionToBeUpdated = configUtils.ifObjectContainsArray(sectionToBeUpdated).value;
+  } else if (ifObjectContainsArray(sectionToBeUpdated).hasArray) {
+    sectionToBeUpdated = ifObjectContainsArray(sectionToBeUpdated).value;
     seachInDefaultConfig(id, action);
   }
 };
